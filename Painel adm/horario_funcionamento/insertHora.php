@@ -12,7 +12,7 @@ $final_func = $_POST['final_func'];
 $bairro_func = $_POST['bairro_func'];
 $cidade_func = $_POST['cidade_func'];
 
-$sql = "INSERT INTO horario_funcionamento(dia_func, inicio_func,final_func , bairro_func,cidade_func) 
+$sql = "INSERT INTO horario_funcionamento(dia_func, inicio_func, final_func, bairro_func, cidade_func) 
 VALUES ('$dia_func','$inicio_func','$final_func','$bairro_func','$cidade_func')";
 
 if($conn->query($sql) === TRUE){

@@ -1,26 +1,29 @@
 <?php
-/* Aqui virá o código de busca utilizando o comando SQL */
 include "../../conexao.php";
+
+// Busca os produtos cadastrados
+$sql = "SELECT * FROM produtos WHERE prod_idcategoria = 'bebida'";
+$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
-    <title>Visualização de Horário</title>
-</head>
-<style>
-     /* =========================
-           CONFIGURAÇÕES GERAIS
-        ========================= */
+    <title>Visualização de Massas</title>
+
+    <style>
 
         * {
             box-sizing: border-box;
@@ -28,11 +31,15 @@ include "../../conexao.php";
 
         body {
             margin: 0;
+
             font-family: Arial, sans-serif;
+
             background-color: #f2f2f2;
+
             min-height: 100vh;
 
             display: flex;
+
             flex-direction: column;
         }
 
@@ -43,16 +50,23 @@ include "../../conexao.php";
 
         header {
             background-color: #dc3545;
+
             width: 100%;
+
             padding: 15px 25px;
         }
+
 
         .header-content {
             width: 100%;
 
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
+
+            gap: 15px;
         }
 
 
@@ -60,6 +74,7 @@ include "../../conexao.php";
 
         .logo {
             width: 100px;
+
             height: 100px;
 
             object-fit: cover;
@@ -76,46 +91,52 @@ include "../../conexao.php";
             margin-left: auto;
 
             display: flex;
+
             align-items: center;
 
+            justify-content: flex-end;
+
             gap: 10px;
+
+            flex-wrap: wrap;
         }
+
 
         .btn-painel {
             font-size: 16px;
+
             padding: 10px 18px;
 
             border-radius: 6px;
         }
+
 
         .dropdown-menu {
             margin-top: 8px !important;
         }
 
 
-
-
-
-    /* =========================
+        /* =========================
            CONTEÚDO
         ========================= */
 
-    main {
-        flex: 1;
+        main {
+            flex: 1;
 
-        width: 100%;
+            width: 100%;
 
-        padding: 40px 20px 50px;
-    }
+            padding: 40px 20px 50px;
+        }
 
-     /* =========================
-           CARD DO FORMULÁRIO
+
+        /* =========================
+           CARD DOS PRODUTOS
         ========================= */
 
-        .caixa-formulario {
+        .caixa-produtos {
             background-color: white;
 
-            max-width: 800px;
+            max-width: 1200px;
 
             margin: 0 auto;
 
@@ -126,295 +147,249 @@ include "../../conexao.php";
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
         }
 
-        .titulo-formulario {
+
+        .titulo-produtos {
             text-align: center;
 
-            margin-bottom: 25px;
+            margin-bottom: 30px;
 
             color: #333;
 
             font-weight: bold;
         }
 
-        .form-label {
-            font-weight: 500;
-        }
 
-        .form-control {
-            border-radius: 7px;
-        }
-
-        .form-control:focus {
-            border-color: #dc3545;
-
-            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.15);
-        }
-
-    /* =========================
-           BOTÕES
-        ========================= */
-
-    .botoes-formulario {
-        display: flex;
-
-        justify-content: center;
-
-        gap: 10px;
-
-        margin-top: 25px;
-    }
-
-    .botoes-formulario .btn {
-        min-width: 120px;
-    }
-
-
-    /* =========================
-           CARD DA TABELA
-        ========================= */
-
-    .caixa-tabela {
-        background-color: white;
-
-        max-width: 1200px;
-
-        margin: 40px auto 0;
-
-        padding: 30px;
-
-        border-radius: 12px;
-
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    }
-
-    .titulo-tabela {
-        text-align: center;
-
-        margin-bottom: 25px;
-
-        color: #333;
-
-        font-weight: bold;
-    }
-
-
-    /* =========================
+        /* =========================
            TABELA
         ========================= */
 
-    .tabela-horarios {
-        width: 100%;
-
-        margin-bottom: 0;
-
-        border-collapse: separate;
-        border-spacing: 0;
-
-        overflow: hidden;
-
-        border-radius: 8px;
-    }
-
-
-    /* Cabeçalho */
-
-    .tabela-horarios thead th {
-        background-color: #dc3545;
-
-        color: white;
-
-        padding: 14px;
-
-        border: none;
-
-        text-align: left;
-
-        white-space: nowrap;
-    }
-
-
-    /* Dados */
-
-    .tabela-horarios tbody td {
-        padding: 14px;
-
-        vertical-align: middle;
-
-        border-bottom: 1px solid #ddd;
-    }
-
-    .tabela-horarios tbody tr:last-child td {
-        border-bottom: none;
-    }
-
-    .tabela-horarios tbody tr:hover {
-        background-color: #f8f8f8;
-    }
-
-
-    /* =========================
-           COLUNA AÇÃO
-        ========================= */
-
-    .coluna-acao {
-        width: 110px;
-
-        text-align: center !important;
-
-        white-space: nowrap;
-    }
-
-    .acao {
-        display: inline-flex;
-
-        align-items: center;
-        justify-content: center;
-
-        margin: 0 5px;
-
-        text-decoration: none;
-    }
-
-    .icone-acao {
-        width: 22px !important;
-        height: 22px !important;
-
-        object-fit: contain;
-
-        margin: 0;
-
-        transition: transform 0.2s;
-    }
-
-    .icone-acao:hover {
-        transform: scale(1.15);
-    }
-
-    /* =========================
-           RODAPÉ
-        ========================= */
-
-    .rodape {
-        width: 100%;
-
-        background-color: #dc3545;
-
-        color: white;
-
-        padding: 40px 25px 20px;
-
-        margin-top: auto;
-    }
-
-    .rodape-container {
-        width: 100%;
-
-        max-width: 1200px;
-
-        margin: 0 auto;
-    }
-
-    .rodape h5 {
-        margin-bottom: 20px;
-
-        font-weight: bold;
-    }
-
-    .rodape p {
-        margin-bottom: 10px;
-    }
-
-    .rodape a {
-        color: white;
-
-        text-decoration: none;
-    }
-
-    .redes-sociais {
-        display: flex;
-
-        justify-content: flex-end;
-
-        gap: 20px;
-    }
-
-    .redes-sociais a {
-        font-size: 28px;
-
-        transition: transform 0.2s;
-    }
-
-    .redes-sociais a:hover {
-        transform: scale(1.15);
-    }
-
-    .direitos {
-        border-top: 1px solid rgba(255, 255, 255, 0.4);
-
-        margin-top: 25px;
-
-        padding-top: 15px;
-
-        text-align: center;
-    }
-
-
-    /* =========================
-           RESPONSIVIDADE
-        ========================= */
-
-    @media (max-width: 768px) {
-
-        header {
-            padding: 12px 15px;
-        }
-
-        .logo {
-            width: 75px;
-            height: 75px;
-        }
-
-        .btn-painel {
-            font-size: 14px;
-
-            padding: 8px 12px;
-        }
-
-        main {
-            padding: 30px 15px;
-        }
-
-        .caixa-formulario,
-        .caixa-tabela {
-            padding: 20px;
-        }
-
-        .horarios {
-            flex-direction: column;
-        }
-
-        .horarios .form-control {
+        .tabela-container {
             width: 100%;
+
+            overflow-x: auto;
         }
 
-        .rodape {
+
+        .tabela-produtos {
+            width: 100%;
+
+            margin-bottom: 0;
+
+            border-collapse: separate;
+
+            border-spacing: 0;
+
+            border-radius: 8px;
+
+            overflow: hidden;
+        }
+
+
+        /* CABEÇALHO */
+
+        .tabela-produtos thead th {
+            background-color: #dc3545;
+
+            color: white;
+
+            padding: 14px;
+
+            border: none;
+
+            text-align: center;
+
+            white-space: nowrap;
+        }
+
+
+        /* DADOS */
+
+        .tabela-produtos tbody td {
+            padding: 14px;
+
+            vertical-align: middle;
+
+            border-bottom: 1px solid #ddd;
+
             text-align: center;
         }
 
-        .redes-sociais {
-            justify-content: center;
+
+        .tabela-produtos tbody tr:last-child td {
+            border-bottom: none;
         }
 
-    }
-</style>
+
+        .tabela-produtos tbody tr:hover {
+            background-color: #f8f8f8;
+        }
+
+
+        /* =========================
+           COLUNA AÇÕES
+        ========================= */
+
+        .coluna-acao {
+            width: 150px;
+
+            text-align: center !important;
+
+            white-space: nowrap;
+        }
+
+
+        .acao {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin: 0 5px;
+
+            text-decoration: none;
+        }
+
+
+        .icone-acao {
+            width: 22px;
+
+            height: 22px;
+
+            object-fit: contain;
+
+            transition: transform 0.2s;
+        }
+
+
+        .icone-acao:hover {
+            transform: scale(1.15);
+        }
+
+
+        /* =========================
+           MENSAGEM
+        ========================= */
+
+        .mensagem-vazia {
+            text-align: center;
+
+            padding: 30px;
+
+            color: #666;
+
+            font-size: 17px;
+        }
+
+
+        /* =========================
+           RODAPÉ
+        ========================= */
+
+        .rodape {
+            width: 100%;
+
+            background-color: #dc3545;
+
+            color: white;
+
+            padding: 40px 25px 20px;
+
+            margin-top: auto;
+        }
+
+
+        .rodape-container {
+            width: 100%;
+
+            max-width: 1200px;
+
+            margin: 0 auto;
+        }
+
+
+        .direitos {
+            border-top: 1px solid rgba(255, 255, 255, 0.4);
+
+            margin-top: 25px;
+
+            padding-top: 15px;
+
+            text-align: center;
+        }
+
+
+        /* =========================
+           RESPONSIVIDADE
+        ========================= */
+
+        @media (max-width: 768px) {
+
+            header {
+                padding: 12px 15px;
+            }
+
+
+            .header-content {
+                flex-direction: column;
+            }
+
+
+            .logo {
+                width: 75px;
+
+                height: 75px;
+            }
+
+
+            .menu-header {
+                margin-left: 0;
+
+                justify-content: center;
+            }
+
+
+            .btn-painel {
+                font-size: 14px;
+
+                padding: 8px 12px;
+            }
+
+
+            main {
+                padding: 30px 15px;
+            }
+
+
+            .caixa-produtos {
+                padding: 20px;
+            }
+
+
+            .tabela-produtos {
+                min-width: 650px;
+            }
+
+
+            .rodape {
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
 
 <body>
 
-<!-- =========================
-     CABEÇALHO
-========================= -->
 
- <header>
+    <!-- =========================
+         CABEÇALHO
+    ========================= -->
+
+    <header>
 
         <div class="header-content">
 
@@ -423,7 +398,10 @@ include "../../conexao.php";
 
             <a href="../menu.php">
 
-                <img src="../../imagens/logoota.jpeg" class="logo" alt="Logo OTA">
+                <img
+                    src="../../imagens/logoota.jpeg"
+                    class="logo"
+                    alt="Logo OTA">
 
             </a>
 
@@ -437,7 +415,10 @@ include "../../conexao.php";
 
                 <div class="dropdown">
 
-                    <button class="btn btn-light dropdown-toggle btn-painel" type="button" data-bs-toggle="dropdown"
+                    <button
+                        class="btn btn-light dropdown-toggle btn-painel"
+                        type="button"
+                        data-bs-toggle="dropdown"
                         aria-expanded="false">
 
                         Painel Administrador
@@ -447,37 +428,58 @@ include "../../conexao.php";
 
                     <ul class="dropdown-menu dropdown-menu-end">
 
+
                         <li>
-                            <a class="dropdown-item" href="../adm/FormAdm.php">
+
+                            <a
+                                class="dropdown-item"
+                                href="../adm/FormAdm.php">
 
                                 Acesso Admin
 
                             </a>
+
                         </li>
 
+
                         <li>
-                            <a class="dropdown-item" href="../produto/FormProd.php">
+
+                            <a
+                                class="dropdown-item"
+                                href="../produto/FormProd.php">
 
                                 Acesso Produtos
 
                             </a>
+
                         </li>
 
+
                         <li>
-                            <a class="dropdown-item" href="../horario_funcionamento/FormHora.php">
+
+                            <a
+                                class="dropdown-item"
+                                href="../horario_funcionamento/FormHora.php">
 
                                 Acesso H. Funcionamento
 
                             </a>
+
                         </li>
 
+
                         <li>
-                            <a class="dropdown-item" href="../avaliacao/VizuAva.php">
+
+                            <a
+                                class="dropdown-item"
+                                href="../avaliacao/VizuAva.php">
 
                                 Acesso Avaliação
 
                             </a>
+
                         </li>
+
 
                     </ul>
 
@@ -488,7 +490,10 @@ include "../../conexao.php";
 
                 <div class="dropdown">
 
-                    <button class="btn btn-light dropdown-toggle btn-painel" type="button" data-bs-toggle="dropdown"
+                    <button
+                        class="btn btn-light dropdown-toggle btn-painel"
+                        type="button"
+                        data-bs-toggle="dropdown"
                         aria-expanded="false">
 
                         L. Produtos
@@ -498,37 +503,52 @@ include "../../conexao.php";
 
                     <ul class="dropdown-menu dropdown-menu-end">
 
+
                         <li>
-                            <a class="dropdown-item" href="pastel.php">
+
+                            <a
+                                class="dropdown-item"
+                                href="pastel.php">
 
                                 Pastel
 
                             </a>
+
                         </li>
 
+
                         <li>
-                            <a class="dropdown-item" href="massa.php">
+
+                            <a
+                                class="dropdown-item"
+                                href="massa.php">
 
                                 Massa
 
                             </a>
+
                         </li>
 
+
                         <li>
-                            <a class="dropdown-item" href="bebidas.php">
+
+                            <a
+                                class="dropdown-item"
+                                href="bebidas.php">
 
                                 Bebida
 
                             </a>
+
                         </li>
+
 
                     </ul>
 
                 </div>
 
-                  <!-- PAINEL ADMINISTRADOR -->
 
-            <div class="menu-header">
+                <!-- LISTAGEM DOS CADASTROS -->
 
                 <div class="dropdown">
 
@@ -544,6 +564,7 @@ include "../../conexao.php";
 
 
                     <ul class="dropdown-menu dropdown-menu-end">
+
 
                         <li>
 
@@ -575,6 +596,7 @@ include "../../conexao.php";
 
                 </div>
 
+
             </div>
 
         </div>
@@ -584,169 +606,209 @@ include "../../conexao.php";
 
 
     <!-- =========================
-     CONTEÚDO PRINCIPAL
-========================= -->
+         CONTEÚDO PRINCIPAL
+    ========================= -->
 
     <main>
 
-    <div class="caixa-produtos">
 
-<h2 class="titulo-produtos">
-    Produtos cadastrados
-</h2>
+        <div class="caixa-produtos">
 
 
-<div class="row g-4">
+            <h2 class="titulo-produtos">
 
-    <?php
+                Massas cadastradas
 
-    /* Busca os produtos no banco */
-
-    $sql = "SELECT * FROM produtos WHERE categoria='massa'"; 
-
-    $result = $conn->query($sql);
+            </h2>
 
 
-    if ($result && $result->num_rows > 0) {
-
-        while ($row = $result->fetch_assoc()) {
-
-            $id_prod = $row['id_prod'];
+            <div class="tabela-container">
 
 
-            /* Verifica se existe imagem */
-
-            $img = !empty($row['prod_foto'])
-                ? $row['prod_foto']
-                : "../../icones/semfoto.png";
+                <table class="tabela-produtos">
 
 
-            echo "
+                    <thead>
 
-            <div class='col-12 col-sm-6 col-lg-4 col-xl-3'>
+                        <tr>
 
-                <div class='card-produto'>
+                            <th>
+                                Nome
+                            </th>
 
+                            <th>
+                                Preço
+                            </th>
 
-                    <!-- IMAGEM -->
+                            <th>
+                                Descrição
+                            </th>
 
-                    <img
-                        src='$img'
-                        class='imagem-produto'
-                        alt='{$row['prod_nome']}'>
+                            <th class="coluna-acao">
+                                Ações
+                            </th>
 
+                        </tr>
 
-                    <!-- INFORMAÇÕES -->
-
-                    <div class='card-produto-body'>
-
-
-                        <h5 class='nome-produto'>
-                            {$row['prod_nome']}
-                        </h5>
-
-
-                        <span class='categoria-produto'>
-                            {$row['categoria']}
-                        </span>
+                    </thead>
 
 
-                        <p class='descricao-produto'>
-                            {$row['prod_descricao']}
-                        </p>
+                    <tbody>
 
 
-                        <p class='preco-produto'>
-                            R$ {$row['prod_preco']}
-                        </p>
+                        <?php
+
+                        if ($result && $result->num_rows > 0) {
+
+                            while ($row = $result->fetch_assoc()) {
+
+                                $id_prod = $row['id_prod'];
+
+                                $nome = htmlspecialchars($row['prod_nome']);
+
+                                $preco = htmlspecialchars($row['prod_preco']);
+
+                                $descricao = htmlspecialchars($row['prod_descricao']);
+
+                                ?>
 
 
-                        <!-- AÇÕES -->
-
-                        <div class='acoes-produto'>
+                                <tr>
 
 
-                            <a
-                                href='editarProd.php?id_prod=$id_prod'
-                                class='btn btn-warning'>
+                                    <!-- NOME -->
 
-                                <i class='bi bi-pencil'></i>
-                                Editar
+                                    <td>
 
-                            </a>
+                                        <?php echo $nome; ?>
 
-
-                            <a
-                                href='deleteProd.php?id_prod=$id_prod'
-                                class='btn btn-danger'
-                                onclick=\"return confirm('Deseja excluir este produto {$row['prod_nome']}?');\">
-
-                                <i class='bi bi-trash'></i>
-                                Excluir
-
-                            </a>
+                                    </td>
 
 
-                        </div>
+                                    <!-- PREÇO -->
 
-                    </div>
+                                    <td>
 
-                </div>
+                                        R$ <?php echo $preco; ?>
+
+                                    </td>
+
+
+                                    <!-- DESCRIÇÃO -->
+
+                                    <td>
+
+                                        <?php echo $descricao; ?>
+
+                                    </td>
+
+
+                                    <!-- AÇÕES -->
+
+                                    <td class="coluna-acao">
+
+
+                                        <!-- EDITAR -->
+
+                                        <a
+                                            href="editarProd.php?id_prod=<?php echo $id_prod; ?>"
+                                            class="acao"
+                                            title="Editar produto">
+
+                                            <img
+                                                src="../../imagens/lapis.png"
+                                                class="icone-acao"
+                                                alt="Editar">
+
+                                        </a>
+
+
+                                        <!-- EXCLUIR -->
+
+                                        <a
+                                            href="deleteProd.php?id_prod=<?php echo $id_prod; ?>"
+                                            class="acao"
+                                            title="Excluir produto"
+                                            onclick="return confirm('Deseja realmente excluir o produto <?php echo $nome; ?>?');">
+
+                                            <img
+                                                src="../../imagens/lixeira.png"
+                                                class="icone-acao"
+                                                alt="Excluir">
+
+                                        </a>
+
+
+                                    </td>
+
+
+                                </tr>
+
+
+                                <?php
+
+                            }
+
+                        } else {
+
+                            ?>
+
+
+                            <tr>
+
+                                <td
+                                    colspan="4"
+                                    class="mensagem-vazia">
+
+                                    Nenhuma massa cadastrada.
+
+                                </td>
+
+                            </tr>
+
+
+                            <?php
+
+                        }
+
+                        ?>
+
+
+                    </tbody>
+
+
+                </table>
+
 
             </div>
 
-            ";
-
-        }
-
-    } else {
-
-        echo "
-
-        <div class='col-12'>
-
-            <div class='sem-produtos'>
-
-                Nenhum produto cadastrado.
-
-            </div>
 
         </div>
 
-        ";
-
-    }
-
-    ?>
-
-</div>
-
-</div>
 
     </main>
 
 
 
     <!-- =========================
-     RODAPÉ
-========================= -->
+         RODAPÉ
+    ========================= -->
 
     <footer class="rodape">
 
+
         <div class="rodape-container">
 
-            <div class="row">
 
+            <div class="direitos">
 
-                <!-- DIREITOS -->
-
-                <div class="direitos">
-
-                    © 2026 Pastelaria OTA - Todos os direitos reservados.
-
-                </div>
+                © 2026 Pastelaria OTA - Todos os direitos reservados.
 
             </div>
+
+
+        </div>
+
 
     </footer>
 
@@ -754,8 +816,8 @@ include "../../conexao.php";
 
     <!-- Bootstrap JS -->
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
 
 </body>
 

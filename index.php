@@ -31,9 +31,15 @@ include "conexao.php";
         }
 
 
+        html,
         body {
             margin: 0;
+            padding: 0;
+            width: 100%;
+        }
 
+
+        body {
             font-family: Arial, sans-serif;
 
             background-color: #f2f2f2;
@@ -41,6 +47,7 @@ include "conexao.php";
             min-height: 100vh;
 
             display: flex;
+
             flex-direction: column;
         }
 
@@ -55,6 +62,10 @@ include "conexao.php";
             width: 100%;
 
             padding: 15px 25px;
+
+            position: relative;
+
+            background-color: #333;
         }
 
 
@@ -70,8 +81,13 @@ include "conexao.php";
             justify-content: center;
 
             position: relative;
+
         }
 
+
+        /* =========================
+           LOGO
+        ========================= */
 
         .logo-container {
             position: absolute;
@@ -98,6 +114,77 @@ include "conexao.php";
 
 
         /* =========================
+           MENU DE NAVEGAÇÃO
+        ========================= */
+
+        .menu-navegacao {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 10px;
+        }
+
+
+        .menu-navegacao a {
+            position: relative;
+
+            color: #ffc107;
+
+            text-decoration: none;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            padding: 10px 16px;
+
+            border-radius: 8px;
+
+            transition: all 0.3s ease;
+        }
+
+
+        .menu-navegacao a::after {
+            content: "";
+
+            position: absolute;
+
+            width: 0;
+
+            height: 3px;
+
+            background-color: #ffc107;
+
+            left: 50%;
+
+            bottom: 4px;
+
+            transform: translateX(-50%);
+
+            border-radius: 10px;
+
+            transition: width 0.3s ease;
+        }
+
+
+        .menu-navegacao a:hover {
+            color: #fff;
+
+            background-color: rgba(255, 193, 7, 0.12);
+
+            transform: translateY(-3px);
+        }
+
+
+        .menu-navegacao a:hover::after {
+            width: 65%;
+        }
+
+
+        /* =========================
            CONTA E CARRINHO
         ========================= */
 
@@ -115,7 +202,7 @@ include "conexao.php";
 
 
         .conta-link {
-            color: black;
+            color: #ffc107;
 
             text-decoration: none;
 
@@ -124,6 +211,15 @@ include "conexao.php";
             align-items: center;
 
             gap: 8px;
+
+            transition: all 0.3s ease;
+        }
+
+
+        .conta-link:hover {
+            transform: translateY(-2px);
+
+            opacity: 0.75;
         }
 
 
@@ -132,27 +228,99 @@ include "conexao.php";
 
             font-weight: bold;
 
-            color: black;
+            color: white;
         }
 
 
         .user {
             font-size: 28px;
 
-            color: black;
+            color: white;
         }
 
 
         .carrinho {
             font-size: 30px;
 
-            color: black;
+            color: white;
+
+            cursor: pointer;
+
+            transition: all 0.3s ease;
         }
 
+
+        .carrinho:hover {
+            transform: scale(1.15);
+
+            color: #ffc107;
+        }
+
+
+
+        /* =========================
+           CARROSSEL
+        ========================= */
+
+        .carrossel-full {
+            width: 100%;
+
+            margin: 0;
+
+            padding: 0;
+
+            overflow: hidden;
+
+        }
+
+
+        .carrossel-full .carousel {
+            width: 100%;
+
+            margin: 0;
+
+            padding: 0;
+
+        }
+
+
+        .carrossel-full .carousel-inner {
+            width: 100%;
+
+            margin: 0;
+
+            padding: 0;
+
+            
+        }
+
+        .carrossel-full .carousel-item img {
+            width: 100%;
+
+            height: 500px;
+
+            display: block;
+
+            margin: 0;
+
+            padding: 0;
+
+            object-fit: fill;
+        }
+
+        .destaque{
+            font-weight: bold;
+
+            color: #fff;
+        }
 
         /* =========================
            CONTEÚDO
         ========================= */
+
+        .vermelho{
+            color: red;
+        }
 
         main {
             flex: 1;
@@ -164,15 +332,50 @@ include "conexao.php";
 
 
         .titulo-conteudo {
-            text-align: center;
 
-            margin-bottom: 35px;
+            font-size: 20px;
 
-            color: #333;
+            font-weight: 600;
+
+            margin-bottom: 5px;
+
+            color: red;
 
             font-weight: bold;
         }
 
+        .valores{
+            font-size: 40px;
+            font-weight: 570;
+            line-height: 1.10;
+            margin-top: 18px;
+        }
+
+        .escrita-conteudo{
+            font-size: 21px;
+            line-height: 1.4;
+            max-width: 100%;
+        }
+
+        .imagem-essencial{
+            width:100%;
+            margin-top: 10px;
+        }
+
+        .cardq{
+        height: 300px;
+
+        width: 100%;
+
+        border-radius: 18px 0 0 18px;
+
+        overflow: hidden;
+
+        }
+
+        .container-fluid .row{
+            padding-bottom: 50px;
+        }
 
         /* =========================
            CARDS PRINCIPAIS
@@ -185,17 +388,173 @@ include "conexao.php";
 
             padding: 30px;
 
-            min-height: 400px;
-
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+
+            width: 100%;
+
+            height: 100%;
         }
 
 
+        /* =========================================
+   DO NOSSO BALCÃO PARA VOCÊ
+========================================= */
+
+.local-pedido {
+    width: 100%;
+    background-color: #333;
+    color: #ffffff;
+
+    padding-top: 30px;
+
+    margin: 0;
+}
+
+
+/* =========================================
+   TÍTULO
+========================================= */
+
+.titulo-local {
+    margin-bottom: 70px;
+}
+
+.titulo-local h2 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 40px;
+    font-weight: 800;
+}
+
+.titulo-local p {
+    margin-top: 12px;
+
+    color: #bdbdbd;
+
+    font-size: 17px;
+}
+
+
+/* =========================================
+   CONTEÚDO
+========================================= */
+
+.local-conteudo {
+    min-height: 270px;
+}
+
+
+/* =========================================
+   INFORMAÇÕES LATERAIS
+========================================= */
+
+.info-local {
+    padding: 20px 10px;
+
+    text-align: center;
+}
+
+
+/* ÍCONES */
+
+.info-local > i {
+    display: block;
+
+    color: #e21b23;
+
+    font-size: 42px;
+
+    margin-bottom: 18px;
+}
+
+
+/* TÍTULOS */
+
+.info-local h3 {
+    color: #ffffff;
+
+    font-size: 23px;
+    font-weight: 700;
+
+    margin-bottom: 12px;
+}
+
+
+/* TEXTOS */
+
+.info-local p {
+    color: #bdbdbd;
+
+    font-size: 16px;
+
+    line-height: 1.7;
+
+    margin-bottom: 22px;
+}
+
+
+/* =========================================
+   BOTÃO VERMELHO
+========================================= */
+
+.btn-local {
+    display: inline-flex;
+
+    align-items: center;
+    gap: 8px;
+
+    padding: 12px 21px;
+
+    background-color: #e21b23;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    border-radius: 30px;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    transition: 0.3s;
+}
+
+
+.btn-local:hover {
+    background-color: #ff2b32;
+
+    color: #ffffff;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   MAPA
+========================================= */
+
+.mapa-local {
+
+    width: 100%;
+    height: 250px;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background-color: #171717;
+
+    text-align: center;
+}
+
+
         /* =========================
-           CARDÁPIO
+           SOBRE NÓS
         ========================= */
 
-        .titulo-cardapio {
+        .titulo-sobre {
             text-align: center;
 
             margin-bottom: 25px;
@@ -206,8 +565,8 @@ include "conexao.php";
         }
 
 
-        .cardapio-conteudo {
-            height: 300px;
+        .sobre-conteudo {
+            min-height: 300px;
 
             display: flex;
 
@@ -218,11 +577,22 @@ include "conexao.php";
             justify-content: center;
 
             text-align: center;
+
+            padding: 10px 20px;
         }
 
 
-        .icone-cardapio {
-            font-size: 70px;
+        .sobre-conteudo h3 {
+            color: #ffc107;
+
+            font-weight: bold;
+
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+
+        .icone-sobre {
+            font-size: 65px;
 
             color: #dc3545;
 
@@ -230,40 +600,16 @@ include "conexao.php";
         }
 
 
-        .cardapio-conteudo p {
-            font-size: 18px;
+        .sobre-conteudo p {
+            font-size: 17px;
+
+            line-height: 1.6;
 
             color: #555;
 
-            margin-bottom: 30px;
-        }
+            max-width: 800px;
 
-
-        .btn_cardapio {
-            display: inline-block;
-
-            background-color: #dc3545;
-
-            color: white;
-
-            text-decoration: none;
-
-            padding: 15px 40px;
-
-            border-radius: 8px;
-
-            font-weight: bold;
-
-            transition: all 0.25s ease;
-        }
-
-
-        .btn_cardapio:hover {
-            background-color: #bb2d3b;
-
-            transform: translateY(-3px);
-
-            color: white;
+            margin-bottom: 15px;
         }
 
 
@@ -271,74 +617,11 @@ include "conexao.php";
            TABELA DE HORÁRIOS
         ========================= */
 
-        .titulo-tabela {
+        .card{
+            padding: 25px;
+            margin: 10px 0;
             text-align: center;
-
-            margin-bottom: 25px;
-
-            color: #333;
-
-            font-weight: bold;
-        }
-
-
-        .tabela-horarios {
-            width: 100%;
-
-            margin-bottom: 0;
-
-            border-collapse: separate;
-
-            border-spacing: 0;
-
-            overflow: hidden;
-
-            border-radius: 8px;
-        }
-
-
-        .tabela-horarios thead th {
-            background-color: #dc3545;
-
-            color: white;
-
-            padding: 14px;
-
-            border: none;
-
-            text-align: center;
-
-            white-space: nowrap;
-        }
-
-
-        .tabela-horarios tbody td {
-            padding: 14px;
-
-            vertical-align: middle;
-
-            text-align: center;
-
-            border-bottom: 1px solid #ddd;
-        }
-
-
-        .tabela-horarios tbody tr:last-child td {
-            border-bottom: none;
-        }
-
-
-        .tabela-horarios tbody tr:hover {
-            background-color: #f8f8f8;
-        }
-
-
-        .sem-horarios {
-            text-align: center !important;
-
-            color: #777;
-
-            padding: 25px !important;
+            background-color: #e9ecef;
         }
 
 
@@ -349,13 +632,13 @@ include "conexao.php";
         .rodape {
             width: 100%;
 
-            background-color: #dc3545;
+            background-color: #333;
 
             color: white;
 
-            padding: 40px 25px 20px;
+            padding: 40px 0 20px 0px;
 
-            margin-top: auto;
+            margin-top: 30px;
         }
 
 
@@ -388,15 +671,56 @@ include "conexao.php";
 
 
         /* =========================
+           SOBRE NÓS DO FOOTER
+        ========================= */
+
+        .sobre-footer {
+            text-align: center;
+
+            padding: 0 25px;
+        }
+
+
+        .sobre-footer h5 {
+            margin-bottom: 20px;
+
+            font-weight: bold;
+        }
+
+
+        .link-sobre-footer {
+            color: white;
+
+            text-decoration: none;
+
+            transition: all 0.3s ease;
+        }
+
+
+        .link-sobre-footer:hover {
+            color: #ffc107;
+
+            text-decoration: underline;
+        }
+
+
+        .sobre-footer p {
+            font-size: 15px;
+
+            line-height: 1.6;
+
+            margin-bottom: 0;
+        }
+
+
+        /* =========================
            REDES SOCIAIS
         ========================= */
 
         .redes-sociais {
-            display: flex;
+            font-size: 20px;
 
-            justify-content: flex-end;
-
-            gap: 20px;
+            margin-right: 20px;
         }
 
 
@@ -431,19 +755,32 @@ include "conexao.php";
            RESPONSIVIDADE
         ========================= */
 
+        @media (max-width: 1100px) {
+
+            .menu-navegacao a {
+                font-size: 15px;
+
+                padding: 8px 10px;
+            }
+
+        }
+
+
         @media (max-width: 991px) {
 
-            .header-direita {
-                position: static;
-
-                margin-top: 15px;
-
-                justify-content: center;
+            header {
+                padding: 15px 20px;
             }
 
 
             .header-content {
-                flex-wrap: wrap;
+                min-height: auto;
+
+                flex-direction: column;
+
+                gap: 15px;
+
+                padding-bottom: 5px;
             }
 
 
@@ -451,11 +788,33 @@ include "conexao.php";
                 position: static;
 
                 transform: none;
+
+                align-self: flex-start;
             }
 
 
-            .card-home {
-                min-height: auto;
+            .menu-navegacao {
+                flex-wrap: wrap;
+
+                width: 100%;
+
+                padding: 5px 0;
+            }
+
+
+            .menu-navegacao a {
+                font-size: 15px;
+
+                padding: 8px 12px;
+            }
+
+
+            .header-direita {
+                position: static;
+
+                margin-top: 5px;
+
+                justify-content: center;
             }
 
 
@@ -468,10 +827,35 @@ include "conexao.php";
                 text-align: center;
             }
 
+
+            .rodape .text-start,
+            .rodape .text-end {
+                text-align: center !important;
+            }
+
+
+            .sobre-footer {
+                padding: 0 10px;
+            }
+
+
+            /* CARROSSEL TABLET */
+
+            .carrossel-full .carousel-item img {
+                height: 400px;
+            }
+
         }
 
 
         @media (max-width: 768px) {
+
+            /* CARROSSEL CELULAR */
+
+            .carrossel-full .carousel-item img {
+                height: 300px;
+            }
+
 
             .tabela-horarios {
                 font-size: 14px;
@@ -481,6 +865,75 @@ include "conexao.php";
             .tabela-horarios thead th,
             .tabela-horarios tbody td {
                 padding: 10px;
+            }
+
+
+            .card-home {
+                padding: 25px 20px;
+            }
+
+
+            .cardapio-conteudo,
+            .sobre-conteudo {
+                min-height: 250px;
+            }
+
+
+            .menu-navegacao {
+                gap: 3px;
+            }
+
+
+            .menu-navegacao a {
+                font-size: 14px;
+
+                padding: 8px 9px;
+            }
+
+        }
+
+
+        @media (max-width: 480px) {
+
+            .logoota {
+                width: 60px;
+
+                height: 60px;
+            }
+
+
+            /* CARROSSEL CELULAR PEQUENO */
+
+            .carrossel-full .carousel-item img {
+                height: 230px;
+            }
+
+
+            .menu-navegacao {
+                display: grid;
+
+                grid-template-columns: repeat(2, 1fr);
+
+                width: 100%;
+
+                gap: 5px;
+            }
+
+
+            .menu-navegacao a {
+                text-align: center;
+
+                width: 100%;
+            }
+
+
+            .header-direita {
+                gap: 18px;
+            }
+
+
+            .sobre-footer p {
+                font-size: 14px;
             }
 
         }
@@ -514,20 +967,61 @@ include "conexao.php";
         </div>
 
 
-    
+        <!-- MENU -->
+
+        <nav class="menu-navegacao">
+
+            <a href="index.php">
+
+                <i class="bi bi-house-door"></i>
+
+                Home
+
+            </a>
+
+
+            <a href="cardapio.php">
+
+                <i class="bi bi-shop"></i>
+
+                
+                Cardápio
+
+            </a>
+
+
+            <a href="sobre.php">
+
+                <i class="bi bi-people"></i>
+
+                Sobre
+
+            </a>
+
+
+            <a href="contato.php">
+
+                <i class="bi bi-telephone"></i>
+
+                Fale Conosco
+
+            </a>
+
+        </nav>
 
 
         <!-- CONTA E CARRINHO -->
 
         <div class="header-direita">
 
-
             <a
-                href="conta_user.php"
+                href="Usuário Final/login_user.php"
                 class="conta-link">
 
                 <span class="conta">
+
                     CONTA
+
                 </span>
 
                 <i class="bi bi-person-circle user"></i>
@@ -544,225 +1038,299 @@ include "conexao.php";
 </header>
 
 
-
 <!-- =========================
-     CONTEÚDO
+     CARROSSEL
 ========================= -->
 
-<main>
-
-    <div class="container-fluid">
+<div class="carrossel-full col-12">
 
 
-        <h2 class="titulo-conteudo">
-            Bem-vindo à Pastelaria OTA
-        </h2>
+    <div
+        id="carouselExampleAutoplaying"
+        class="carousel slide"
+        data-bs-ride="carousel"
+        data-bs-interval="2300">
 
 
-        <div class="row g-4">
+        <div class="carousel-inner">
 
 
-            <!-- =========================
-                 CARDÁPIO - ESQUERDA
-            ========================= -->
+            <div class="carousel-item active">
 
-            <div class="col-12 col-lg-5">
+                <img
+                    src="imagens/WhatsApp Image 2026-09-17 at 18.00.00.jpeg"
+                    alt="Pastelaria OTA">
 
-                <div class="card-home">
-
-
-                    <h2 class="titulo-cardapio">
-                        Cardápio
-                    </h2>
+                    <div class="carousel-caption d-none d-md-block">
+                <h3 class="destaque">Destaques da Semana</h3>
+              </div>
+            </div>
 
 
-                    <div class="cardapio-conteudo">
+            <div class="carousel-item">
 
+                <img
+                    src="imagens/WhatsApp Image 2026-09-17 at 18.00.02.jpeg"
+                    alt="Pastéis OTA">
 
-                        <i class="bi bi-shop icone-cardapio"></i>
-
-
-                        <p>
-                            Confira nossos produtos e escolha
-                            seus pastéis favoritos.
-                        </p>
-
-
-                        <a
-                            class="btn_cardapio"
-                            href="cardapio.php">
-
-                            Ver Cardápio
-
-                        </a>
-
-
-                    </div>
-
-                </div>
+                    <div class="carousel-caption d-none d-md-block">
+                <h2 class="destaque">Destaques da Semana</h2>
+              </div>
 
             </div>
 
 
+            <div class="carousel-item">
 
-            <!-- =========================
-                 HORÁRIOS - DIREITA
-            ========================= -->
+                <img
+                    src="imagens/WhatsApp Image 2026-09-17 at 18.00.01.jpeg"
+                    alt="Pastéis OTA">
 
-            <div class="col-12 col-lg-7">
-
-                <div class="card-home">
-
-
-                    <h2 class="titulo-tabela">
-                        Horários de Funcionamento
-                    </h2>
-
-
-                    <div class="table-responsive">
-
-
-                        <table class="table tabela-horarios">
-
-
-                            <thead>
-
-                                <tr>
-
-                                    <th>
-                                        Dia de Funcionamento
-                                    </th>
-
-                                    <th>
-                                        Horário de Início
-                                    </th>
-
-                                    <th>
-                                        Horário de Final
-                                    </th>
-
-                                    <th>
-                                        Cidade
-                                    </th>
-
-                                    <th>
-                                        Local/Bairro
-                                    </th>
-
-                                </tr>
-
-                            </thead>
-
-
-
-                            <tbody>
-
-                                <?php
-
-                                /* Busca os horários no banco */
-
-                                $sql = "SELECT * FROM horario_funcionamento";
-
-                                $result = $conn->query($sql);
-
-
-                                if ($result && $result->num_rows > 0) {
-
-                                    while ($row = $result->fetch_assoc()) {
-
-                                        echo "
-
-                                        <tr>
-
-                                            <td>
-                                                {$row['dia_func']}
-                                            </td>
-
-                                            <td>
-                                                {$row['inicio_func']}
-                                            </td>
-
-                                            <td>
-                                                {$row['final_func']}
-                                            </td>
-
-                                            <td>
-                                                {$row['cidade_func']}
-                                            </td>
-
-                                            <td>
-                                                {$row['bairro_func']}
-                                            </td>
-
-                                        </tr>
-
-                                        ";
-
-                                    }
-
-                                } else {
-
-                                    echo "
-
-                                    <tr>
-
-                                        <td
-                                            colspan='5'
-                                            class='sem-horarios'>
-
-                                            Nenhum horário cadastrado.
-
-                                        </td>
-
-                                    </tr>
-
-                                    ";
-
-                                }
-
-                                ?>
-
-                            </tbody>
-
-
-                        </table>
-
-
-                    </div>
-
-                </div>
+                    <div class="carousel-caption d-none d-md-block">
+                <h2 class="destaque">Destaques da Semana</h2>
+              </div>
 
             </div>
 
 
         </div>
 
+
+        <!-- BOTÃO ANTERIOR -->
+
+        <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExampleAutoplaying"
+            data-bs-slide="prev">
+
+            <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true">
+            </span>
+
+            <span class="visually-hidden">
+                Anterior
+            </span>
+
+        </button>
+
+
+        <!-- BOTÃO PRÓXIMO -->
+
+        <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExampleAutoplaying"
+            data-bs-slide="next">
+
+            <span
+                class="carousel-control-next-icon"
+                aria-hidden="true">
+            </span>
+
+            <span class="visually-hidden">
+                Próximo
+            </span>
+
+        </button>
+
+
     </div>
 
-</main>
+</div>
 
+
+<!-- =========================
+     CONTEÚDO
+========================= -->
+
+<main id="home">
+
+    <div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-lg-5 col-md-5 col-sm-12">
+
+        
+        <h5 class="titulo-conteudo">
+
+            A NOSSA ESSÊNCIA
+
+        </h5>
+
+        <h3 class="valores">
+
+        Feito para matar a fome.
+        Feito para <span class="vermelho">
+            você</span>.
+
+        </h3>
+
+        <p class="escrita-conteudo">Na Ota Pasteís, cada pastel é preparado com 
+        carinho, ingredientes selecionados e muito sabor.
+        Mais do que uma refeição, é uma experiência!
+        </p>
+
+        </div>
+
+        <div class="col-lg-7 col-md-7 col-sm-12">
+                
+            <img class="cardq" src="imagens/WhatsApp Image 2026-09-23 at 13.36.40.jpeg">
+        </div>
+
+        
+    </div>
+
+    </div>
+<!---
+CONTEUDO DO NOS VISITE
+-->
+
+    <!-- =========================
+         CONTEÚDO ANTERIOR
+         A NOSSA ESSÊNCIA
+    ========================== -->
+
+    <section class="essencia">
+        <!-- Seu conteúdo anterior fica aqui -->
+    </section>
+
+
+    <!-- =========================
+         DO NOSSO BALCÃO PARA VOCÊ
+    ========================== -->
+
+    <section class="local-pedido">
+
+        <div class="container">
+
+            <!-- Título -->
+            <div class="titulo-local text-center">
+
+                <h2>Do nosso balcão para você</h2>
+
+                <p>
+                    Venha nos visitar ou peça seu pastel sem sair de casa.
+                </p>
+
+            </div>
+
+
+            <!-- Conteúdo -->
+            <div class="row align-items-center local-conteudo">
+
+                <!-- =====================
+                     LOCALIZAÇÃO
+                ====================== -->
+
+                <div class="col-lg-3 col-md-4">
+
+                    <div class="info-local">
+
+                        <i class="bi bi-geo-alt-fill"></i>
+
+                        <h3>Venha nos visitar</h3>
+
+                        <p>
+                            Rua X, 123 - Centro<br>
+                            Guaratinguetá - SP
+                        </p>
+
+                        <a href="#" class="btn-local">
+                            <i class="bi bi-map"></i>
+                            Como chegar
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =====================
+                     MAPA
+                ====================== -->
+
+                <div class="col-lg-6 col-md-4">
+
+                    <div class="mapa-local">
+
+                        <!-- Coloque sua imagem do mapa aqui -->
+                        
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3676.8562617126704!2d-45.23496472595337!3d-22.84480683565638!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ccc3666e659ad9%3A0x27568b4dd0a109b4!2sAv.%20Jo%C3%A3o%20Paulo%20II%2C%20Aparecida%20-%20SP%2C%2012575-050!5e0!3m2!1spt-BR!2sbr!4v1789588626173!5m2!1spt-BR!2sbr" 
+                        width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =====================
+                     DELIVERY
+                ====================== -->
+
+                <div class="col-lg-3 col-md-4">
+
+                    <div class="info-local">
+
+                        <i class="bi bi-bicycle"></i>
+
+                        <h3>Prefere receber em casa?</h3>
+
+                        <p>
+                            Faça seu pedido online e
+                            receba seu pastel quentinho.
+                        </p>
+
+                        <a href="cardapio.php" class="btn-local">
+                            <i class="bi bi-cart"></i>
+                            Fazer pedido
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+</div>   
+        
+        
+</main>
 
 
 <!-- =========================
      RODAPÉ
 ========================= -->
 
-<footer class="rodape">
+<footer
+    class="rodape"
+    id="contato">
 
 
     <div class="rodape-container">
 
 
-        <div class="row">
+        <div class="row ">
 
 
-            <!-- CONTATO -->
+            <!-- =========================
+                 FALE CONOSCO
+            ========================= -->
 
-            <div class="col-lg-6 col-md-6 col-sm-12 mb-4 text-start">
-
+            <div class="col-lg-4 col-md-4 col-sm-12 mb-4 text-center">
 
                 <h5>
-                    Contato
+
+                    Fale Conosco
+
                 </h5>
 
 
@@ -785,21 +1353,59 @@ include "conexao.php";
 
 
                 <p>
+
                     São Paulo - SP
+
                 </p>
+
+            </div>
+
+
+            <!-- =========================
+                 SOBRE NÓS
+            ========================= -->
+
+            <div class="col-lg-4 col-sm-12 mb-4 text-center">
+
+
+                    <h5>
+
+                    Links                        
+
+                    </h5>
+
+                    <p>
+                        <a href="faleconosco" 
+                        class="link-sobre-footer">
+                            Fale Conosco
+                        </a>
+                    </p>
+
+                    <p>
+
+                    <a href="sobre.php" 
+                    class="link-sobre-footer">
+
+                            Sobre Nós
+
+                        </a>
+                    </p>
 
 
             </div>
 
 
+            <!-- =========================
+                 REDES SOCIAIS
+            ========================= -->
 
-            <!-- REDES SOCIAIS -->
-
-            <div class="col-lg-6 col-md-6 col-sm-12 mb-4 text-end">
+            <div class="col-lg-4 col-md-4 col-sm-12 mb-4 text-center">
 
 
                 <h5>
+
                     Siga-nos
+
                 </h5>
 
 
@@ -836,8 +1442,9 @@ include "conexao.php";
         </div>
 
 
-
-        <!-- DIREITOS -->
+        <!-- =========================
+             DIREITOS
+        ========================= -->
 
         <div class="direitos">
 
@@ -849,7 +1456,6 @@ include "conexao.php";
     </div>
 
 </footer>
-
 
 
 <!-- Bootstrap JS -->

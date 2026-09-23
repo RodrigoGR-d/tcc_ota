@@ -8,7 +8,7 @@ em PHP $ para receber através do método POST o name do HTML */
 $id_categoria = $_POST['id_cate'];
 $cate_nome = $_POST['cate_nome'];
 
-$sql = "INSERT INTO pedido(id_cate,cate_nome) 
+$sql = "INSERT INTO categoria(id_cate,cate_nome) 
 VALUES ('$id_cate','$cate_nome')";
 
 if($conn->query($sql) === TRUE){

@@ -26,7 +26,7 @@ if(isset($_FILES['prod_foto']) && $_FILES['prod_foto']['error'] == 0){
 }
 
 
-$sql = "INSERT INTO produtos(id_prod,prod_nome, prod_preco,prod_descricao, categoria, prod_foto) 
+$sql = "INSERT INTO produtos(id_prod, prod_nome, prod_preco, prod_descricao, categoria, prod_foto) 
 VALUES ('$id_prod','$prod_nome','$prod_preco','$prod_descricao','$prod_categoria','$prod_foto')";
 
 if($conn->query($sql) === TRUE){

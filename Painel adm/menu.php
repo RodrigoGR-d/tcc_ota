@@ -332,11 +332,8 @@
 
             <!-- LOGO -->
 
-            <a href="../menu.php">
-
                 <img src="../imagens/logoota.jpeg" class="logo" alt="Logo OTA">
 
-            </a>
 
 
             <!-- TÍTULO -->

@@ -11,7 +11,7 @@ $senha_cli = $_POST['senha_cli'];
 $email_cli = $_POST['email_cli'];
 $telefone_cli = $_POST['telefone_cli'];
 
-$sql = "INSERT INTO cliente(, cpf_cli, nome_cli,senha_cli,email_cli,telefone_cli) 
+$sql = "INSERT INTO cliente(cpf_cli, nome_cli,senha_cli,email_cli,telefone_cli) 
 VALUES ('$cpf_cli','$nome_cli','$senha_cli','$email_cli','$telefone_cli')";
 
 if($conn->query($sql) === TRUE){
