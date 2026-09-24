@@ -1234,13 +1234,13 @@ CONTEUDO DO NOS VISITE
                         <h3>Venha nos visitar</h3>
 
                         <p>
-                            Rua X, 123 - Centro<br>
-                            Guaratinguetá - SP
+                            Avenida João Paulo II - 420<br>
+                            Aparecida - SP
                         </p>
 
-                        <a href="#" class="btn-local">
+                        <a href="https://www.google.com/maps/place/Av.+Jo%C3%A3o+Paulo+II,+Aparecida+-+SP,+12575-050/@-22.844812,-45.23239,15z/data=!4m6!3m5!1s0x94ccc3666e659ad9:0x27568b4dd0a109b4!8m2!3d-22.8448118!4d-45.2323898!16s%2Fg%2F11z7qc7f43?hl=pt-BR&entry=ttu&g_ep=EgoyMDI2MDkyMi4wIKXMDSoASAFQAw%3D%3D" class="btn-local">
                             <i class="bi bi-map"></i>
-                            Como chegar
+                            Maps Google
                         </a>
 
                     </div>
@@ -1298,8 +1298,6 @@ CONTEUDO DO NOS VISITE
 
     </section>
 
-
-
 </div>   
         
         
@@ -1338,7 +1336,7 @@ CONTEUDO DO NOS VISITE
 
                     <i class="bi bi-telephone"></i>
 
-                    (12) 99999-9999
+                    (12) 99241-5366
 
                 </p>
 
@@ -1347,14 +1345,14 @@ CONTEUDO DO NOS VISITE
 
                     <i class="bi bi-geo-alt"></i>
 
-                    Rua Neymar, Centro
+                    Avenida João Paulo II - 420
 
                 </p>
 
 
                 <p>
 
-                    São Paulo - SP
+                    Aparecida - SP
 
                 </p>
 
