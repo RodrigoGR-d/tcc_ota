@@ -59,7 +59,6 @@ include("conexao.php");
         ========================= */
 
         header {
-
             background-color: #dc3545;
 
             width: 100%;
@@ -68,11 +67,11 @@ include("conexao.php");
 
             position: relative;
 
+            background-color: #333;
         }
 
 
         .header-content {
-
             width: 100%;
 
             min-height: 70px;
@@ -88,8 +87,11 @@ include("conexao.php");
         }
 
 
-        .logo-container {
+        /* =========================
+           LOGO
+        ========================= */
 
+        .logo-container {
             position: absolute;
 
             left: 0;
@@ -97,12 +99,10 @@ include("conexao.php");
             top: 50%;
 
             transform: translateY(-50%);
-
         }
 
 
         .logoota {
-
             width: 70px;
 
             height: 70px;
@@ -112,12 +112,14 @@ include("conexao.php");
             border-radius: 50%;
 
             display: block;
-
         }
 
 
-        .menu-navegacao {
+        /* =========================
+           MENU DE NAVEGAÇÃO
+        ========================= */
 
+        .menu-navegacao {
             display: flex;
 
             align-items: center;
@@ -125,12 +127,10 @@ include("conexao.php");
             justify-content: center;
 
             gap: 10px;
-
         }
 
 
         .menu-navegacao a {
-
             position: relative;
 
             color: #ffc107;
@@ -146,12 +146,10 @@ include("conexao.php");
             border-radius: 8px;
 
             transition: all 0.3s ease;
-
         }
 
 
         .menu-navegacao a::after {
-
             content: "";
 
             position: absolute;
@@ -171,30 +169,28 @@ include("conexao.php");
             border-radius: 10px;
 
             transition: width 0.3s ease;
-
         }
 
 
         .menu-navegacao a:hover {
-
             color: #fff;
 
             background-color: rgba(255, 193, 7, 0.12);
 
             transform: translateY(-3px);
-
         }
 
 
         .menu-navegacao a:hover::after {
-
             width: 65%;
-
         }
 
 
-        .header-direita {
+        /* =========================
+           CONTA E CARRINHO
+        ========================= */
 
+        .header-direita {
             position: absolute;
 
             right: 0;
@@ -204,13 +200,11 @@ include("conexao.php");
             align-items: center;
 
             gap: 25px;
-
         }
 
 
         .conta-link {
-
-            color: black;
+            color: #ffc107;
 
             text-decoration: none;
 
@@ -221,59 +215,51 @@ include("conexao.php");
             gap: 8px;
 
             transition: all 0.3s ease;
-
         }
 
 
         .conta-link:hover {
-
             transform: translateY(-2px);
 
             opacity: 0.75;
-
         }
 
 
         .conta {
-
             margin: 0;
 
             font-weight: bold;
 
-            color: black;
-
+            color: white;
         }
 
 
         .user {
-
             font-size: 28px;
 
-            color: black;
-
+            color: white;
         }
 
 
         .carrinho {
-
             font-size: 30px;
 
-            color: black;
+            color: white;
 
             cursor: pointer;
 
             transition: all 0.3s ease;
-
         }
 
 
         .carrinho:hover {
-
             transform: scale(1.15);
 
             color: #ffc107;
-
         }
+
+
+
 
 
         /* =========================
@@ -332,7 +318,7 @@ include("conexao.php");
 
             font-weight: bold;
 
-            border-bottom: 3px solid #ffc107;
+            border-bottom: 3px solid #333;
 
             padding-bottom: 8px;
 
@@ -466,102 +452,123 @@ include("conexao.php");
 
 
         /* =========================
-           FOOTER
+           RODAPÉ
         ========================= */
 
-        .rodape {
 
+
+        .rodape {
             width: 100%;
 
-            background-color: #dc3545;
+            background-color: #333;
 
             color: white;
 
-            padding: 40px 25px 20px;
+            padding: 40px 0 20px 0px;
 
-            margin-top: auto;
-
+            margin-top: 30px;
         }
 
 
         .rodape-container {
-
             width: 100%;
 
             max-width: 1200px;
 
             margin: 0 auto;
-
         }
 
 
         .rodape h5 {
-
             margin-bottom: 20px;
 
             font-weight: bold;
-
         }
 
 
         .rodape p {
-
             margin-bottom: 10px;
+        }
 
+
+        .rodape a {
+            color: white;
+
+            text-decoration: none;
+        }
+
+
+        /* =========================
+           SOBRE NÓS DO FOOTER
+        ========================= */
+
+        .sobre-footer {
+            text-align: center;
+
+            padding: 0 25px;
+        }
+
+
+        .sobre-footer h5 {
+            margin-bottom: 20px;
+
+            font-weight: bold;
         }
 
 
         .link-sobre-footer {
-
             color: white;
 
             text-decoration: none;
 
             transition: all 0.3s ease;
-
         }
 
 
         .link-sobre-footer:hover {
-
             color: #ffc107;
 
             text-decoration: underline;
-
         }
 
 
+        .sobre-footer p {
+            font-size: 15px;
+
+            line-height: 1.6;
+
+            margin-bottom: 0;
+        }
+
+
+        /* =========================
+           REDES SOCIAIS
+        ========================= */
+
         .redes-sociais {
+            font-size: 20px;
 
-            display: flex;
-
-            justify-content: center;
-
-            gap: 20px;
-
+            margin-right: 20px;
         }
 
 
         .redes-sociais a {
-
             font-size: 28px;
 
             transition: transform 0.2s;
-
-            color: white;
-
         }
 
 
         .redes-sociais a:hover {
-
             transform: scale(1.15);
-
         }
 
 
-        .direitos {
+        /* =========================
+           DIREITOS
+        ========================= */
 
+        .direitos {
             border-top: 1px solid rgba(255, 255, 255, 0.4);
 
             margin-top: 25px;
@@ -569,7 +576,6 @@ include("conexao.php");
             padding-top: 15px;
 
             text-align: center;
-
         }
 
 
@@ -580,11 +586,9 @@ include("conexao.php");
         @media (max-width: 1100px) {
 
             .menu-navegacao a {
-
                 font-size: 15px;
 
                 padding: 8px 10px;
-
             }
 
         }
@@ -593,39 +597,80 @@ include("conexao.php");
         @media (max-width: 991px) {
 
             header {
-
                 padding: 15px 20px;
+            }
 
+
+            .header-content {
+                min-height: auto;
+
+                flex-direction: column;
+
+                gap: 15px;
+
+                padding-bottom: 5px;
+            }
+
+
+            .logo-container {
+                position: static;
+
+                transform: none;
+
+                align-self: flex-start;
             }
 
 
             .menu-navegacao {
+                flex-wrap: wrap;
 
-                gap: 5px;
+                width: 100%;
 
+                padding: 5px 0;
             }
 
 
             .menu-navegacao a {
+                font-size: 15px;
 
-                font-size: 14px;
-
-                padding: 8px;
-
+                padding: 8px 12px;
             }
 
 
             .header-direita {
+                position: static;
 
-                gap: 18px;
+                margin-top: 5px;
 
+                justify-content: center;
             }
 
 
-            .conta {
+            .redes-sociais {
+                justify-content: center;
+            }
 
-                display: none;
 
+            .rodape {
+                text-align: center;
+            }
+
+
+            .rodape .text-start,
+            .rodape .text-end {
+                text-align: center !important;
+            }
+
+
+            .sobre-footer {
+                padding: 0 10px;
+            }
+
+
+            /* CARROSSEL TABLET */
+
+            .carrossel-full .carousel-item img {
+                height: 400px;
             }
 
         }
@@ -633,19 +678,44 @@ include("conexao.php");
 
         @media (max-width: 768px) {
 
+            /* CARROSSEL CELULAR */
+
+            .carrossel-full .carousel-item img {
+                height: 300px;
+            }
+
+
+            .tabela-horarios {
+                font-size: 14px;
+            }
+
+
+            .tabela-horarios thead th,
+            .tabela-horarios tbody td {
+                padding: 10px;
+            }
+
+
+            .card-home {
+                padding: 25px 20px;
+            }
+
+
+            .cardapio-conteudo,
+            .sobre-conteudo {
+                min-height: 250px;
+            }
+
+
             .menu-navegacao {
-
                 gap: 3px;
-
             }
 
 
             .menu-navegacao a {
-
                 font-size: 14px;
 
                 padding: 8px 9px;
-
             }
 
         }
@@ -654,16 +724,20 @@ include("conexao.php");
         @media (max-width: 480px) {
 
             .logoota {
-
                 width: 60px;
 
                 height: 60px;
+            }
 
+
+            /* CARROSSEL CELULAR PEQUENO */
+
+            .carrossel-full .carousel-item img {
+                height: 230px;
             }
 
 
             .menu-navegacao {
-
                 display: grid;
 
                 grid-template-columns: repeat(2, 1fr);
@@ -671,26 +745,27 @@ include("conexao.php");
                 width: 100%;
 
                 gap: 5px;
-
             }
 
 
             .menu-navegacao a {
-
                 text-align: center;
 
                 width: 100%;
-
             }
 
 
             .header-direita {
-
                 gap: 18px;
+            }
 
+
+            .sobre-footer p {
+                font-size: 14px;
             }
 
         }
+
 
     </style>
 
@@ -699,97 +774,95 @@ include("conexao.php");
 
 <body>
 
-
     <!-- =========================
-         CABEÇALHO
-    ========================= -->
+     CABEÇALHO
+========================= -->
 
-    <header>
+<header>
 
-        <div class="header-content">
-
-
-            <div class="logo-container">
-
-                <img
-                    class="logoota"
-                    src="imagens/logoota.jpeg"
-                    alt="Logo OTA">
-
-            </div>
+<div class="header-content">
 
 
-            <nav class="menu-navegacao">
+    <!-- LOGO -->
+
+    <div class="logo-container">
+
+        <img
+            class="logoota"
+            src="imagens/logoota.jpeg"
+            alt="Logo OTA">
+
+    </div>
 
 
-                <a href="index.php">
+    <!-- MENU -->
 
-                    <i class="bi bi-house-door"></i>
+    <nav class="menu-navegacao">
 
-                    Home
+        <a href="index.php">
 
-                </a>
+            <i class="bi bi-house-door"></i>
 
+            Home
 
-                <a href="cardapio.php">
-
-                    <i class="bi bi-shop"></i>
-
-                    Cardápio
-
-                </a>
+        </a>
 
 
-                <a href="sobre.php">
+        <a href="cardapio.php">
 
-                    <i class="bi bi-people"></i>
+            <i class="bi bi-shop"></i>
 
-                    Sobre
+            Cardápio
 
-                </a>
-
-
-                <a href="contato.php">
-
-                    <i class="bi bi-telephone"></i>
-
-                    Fale Conosco
-
-                </a>
+        </a>
 
 
-            </nav>
+        <a href="sobre.php">
+
+            <i class="bi bi-people"></i>
+
+            Sobre
+
+        </a>
 
 
-            <div class="header-direita">
+        <a href="contato.php">
+
+            <i class="bi bi-telephone"></i>
+
+            Fale Conosco
+
+        </a>
+
+    </nav>
 
 
-                <a
-                    href="Usuário Final/login_user.php"
-                    class="conta-link">
+    <!-- CONTA E CARRINHO -->
 
-                    <span class="conta">
+    <div class="header-direita">
 
-                        CONTA
+        <a
+            href="Usuário Final/login_user.php"
+            class="conta-link">
 
-                    </span>
+            <span class="conta">
 
+                CONTA
 
-                    <i class="bi bi-person-circle user"></i>
+            </span>
 
-                </a>
+            <i class="bi bi-person-circle user"></i>
 
-
-                <i class="bi bi-cart4 carrinho"></i>
-
-
-            </div>
+        </a>
 
 
-        </div>
+        <i class="bi bi-cart4 carrinho"></i>
 
-    </header>
+    </div>
 
+</div>
+
+</header>
 
     <!-- =========================
          TÍTULO
@@ -815,7 +888,7 @@ include("conexao.php");
 
         <?php
 
-        $sql = "SELECT * FROM produtos ORDER BY categoria, prod_nome";
+        $sql = "SELECT * FROM produtos ORDER BY categoria, id_prod";
 
         $resultado = $conn->query($sql);
 
@@ -1009,161 +1082,151 @@ include("conexao.php");
     ========================= -->
 
     <footer
-        class="rodape"
-        id="contato">
+    class="rodape"
+    id="contato">
 
 
-        <div class="rodape-container">
+    <div class="rodape-container">
 
 
-            <div class="row ">
+        <div class="row ">
 
 
-                <!-- =========================
-                     FALE CONOSCO
-                ========================= -->
+            <!-- =========================
+                 FALE CONOSCO
+            ========================= -->
 
-                <div class="col-lg-4 col-md-4 col-sm-12 mb-4 text-center">
+            <div class="col-lg-4 col-md-4 col-sm-12 mb-4 text-center">
+
+                <h5>
+
+                    Fale Conosco
+
+                </h5>
+
+
+                <p>
+
+                    <i class="bi bi-telephone"></i>
+
+                    (12) 99999-9999
+
+                </p>
+
+
+                <p>
+
+                    <i class="bi bi-geo-alt"></i>
+
+                    Rua Neymar, Centro
+
+                </p>
+
+
+                <p>
+
+                    São Paulo - SP
+
+                </p>
+
+            </div>
+
+
+            <!-- =========================
+                 SOBRE NÓS
+            ========================= -->
+
+            <div class="col-lg-4 col-sm-12 mb-4 text-center">
+
 
                     <h5>
 
-                        Fale Conosco
+                    Links                        
 
                     </h5>
 
-
                     <p>
-
-                        <i class="bi bi-telephone"></i>
-
-                        (12) 99999-9999
-
-                    </p>
-
-
-                    <p>
-
-                        <i class="bi bi-geo-alt"></i>
-
-                        Rua Neymar, Centro
-
-                    </p>
-
-
-                    <p>
-
-                        São Paulo - SP
-
-                    </p>
-
-                </div>
-
-
-                <!-- =========================
-                     LINKS
-                ========================= -->
-
-                <div class="col-lg-4 col-sm-12 mb-4 text-center">
-
-
-                    <h5>
-
-                        Links
-
-                    </h5>
-
-
-                    <p>
-
-                        <a
-                            href="faleconosco"
-                            class="link-sobre-footer">
-
+                        <a href="faleconosco" 
+                        class="link-sobre-footer">
                             Fale Conosco
-
                         </a>
-
                     </p>
-
 
                     <p>
 
-                        <a
-                            href="sobre.php"
-                            class="link-sobre-footer">
+                    <a href="sobre.php" 
+                    class="link-sobre-footer">
 
                             Sobre Nós
 
                         </a>
-
                     </p>
-
-
-                </div>
-
-
-                <!-- =========================
-                     REDES SOCIAIS
-                ========================= -->
-
-                <div class="col-lg-4 col-md-4 col-sm-12 mb-4 text-center">
-
-
-                    <h5>
-
-                        Siga-nos
-
-                    </h5>
-
-
-                    <div class="redes-sociais">
-
-
-                        <a href="#">
-
-                            <i class="bi bi-facebook"></i>
-
-                        </a>
-
-
-                        <a href="#">
-
-                            <i class="bi bi-instagram"></i>
-
-                        </a>
-
-
-                        <a href="#">
-
-                            <i class="bi bi-twitter-x"></i>
-
-                        </a>
-
-
-                    </div>
-
-
-                </div>
 
 
             </div>
 
 
             <!-- =========================
-                 DIREITOS
+                 REDES SOCIAIS
             ========================= -->
 
-            <div class="direitos">
+            <div class="col-lg-4 col-md-4 col-sm-12 mb-4 text-center">
 
-                © 2026 Pastelaria OTA - Todos os direitos reservados.
+
+                <h5>
+
+                    Siga-nos
+
+                </h5>
+
+
+                <div class="redes-sociais">
+
+
+                    <a href="#">
+
+                        <i class="bi bi-facebook"></i>
+
+                    </a>
+
+
+                    <a href="#">
+
+                        <i class="bi bi-instagram"></i>
+
+                    </a>
+
+
+                    <a href="#">
+
+                        <i class="bi bi-twitter-x"></i>
+
+                    </a>
+
+
+                </div>
+
 
             </div>
 
 
         </div>
 
-    </footer>
 
+        <!-- =========================
+             DIREITOS
+        ========================= -->
+
+        <div class="direitos">
+
+            © 2026 Pastelaria OTA - Todos os direitos reservados.
+
+        </div>
+
+
+    </div>
+
+</footer>
 
     <!-- Bootstrap JS -->
 
