@@ -2,7 +2,7 @@
 include "../../conexao.php";
 
 // Busca somente os produtos da categoria bebida
-$sql = "SELECT * FROM produtos WHERE prod_idcategoria = 'bebida'";
+$sql = "SELECT * FROM produtos WHERE categoria = 'bebida'";
 $result = $conn->query($sql);
 ?>
 
