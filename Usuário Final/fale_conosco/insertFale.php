@@ -5,19 +5,21 @@ include "../../conexao.php";
 
 /* Neste trecho o código está sendo criado uma variavel
 em PHP $ para receber através do método POST o name do HTML */
-$cpf_adm = $_POST['cpf_adm'];
-$nome_adm = $_POST['nome_adm'];
-$senha_adm = $_POST['senha_adm'];
-$email_adm = $_POST['email_adm'];
+$id_fale = $_POST['id_fale'];
+$nome_fale = $_POST['nome_fale'];
+$assunto_fale = $_POST['assunto_fale'];
+$telefone_fale = $_POST['telefone_fale'];
+$email_fale = $_POST['email_fale'];
+$mensagem_fale = $_POST['mensagem_fale'];
 
-$sql = "INSERT INTO adm(cpf_adm,nome_adm,senha_adm,email_adm) 
-VALUES ('$cpf_adm','$nome_adm','$senha_adm','$email_adm')";
+$sql = "INSERT INTO fale_conosco(id_fale, nome_fale, assunto_fale, email_fale, mensagem_fale ) 
+VALUES ('$id_fale', '$nome_fale', '$assunto_fale', '$email_fale', '$mensagem_fale')";
 
 if($conn->query($sql) === TRUE){
     echo 
     "<script>
     alert('Dados cadastrados com sucesso!');
-    window.location.href='formAdm.php';
+    window.location.href='contato.php';
     </script>";
 }else{
     echo 'Erro ao inserir:'.$conn->error;
