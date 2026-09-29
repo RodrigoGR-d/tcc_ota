@@ -1,32 +1,26 @@
 <?php
-/* Aqui virá o código de busca utilizando o comando SQL */
 include "../../conexao.php";
+
+$sql = "SELECT * FROM avaliacao";
+$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Avaliação</title>
+    <title>Avaliações</title>
 
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-        rel="stylesheet">
-
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
 
     <style>
-
-        /* =========================
-           CONFIGURAÇÕES GERAIS
-        ========================= */
-
         * {
             box-sizing: border-box;
         }
@@ -34,62 +28,80 @@ include "../../conexao.php";
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
+            background-color: #333;
+            color: white;
             min-height: 100vh;
+
             display: flex;
             flex-direction: column;
         }
-
 
         /* =========================
            CABEÇALHO
         ========================= */
 
         header {
-            background-color: #dc3545;
             width: 100%;
             padding: 15px 25px;
+
+            background-color: #222;
+
+            border-bottom: 1px solid #444;
+
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
         }
 
         .header-content {
             width: 100%;
+            min-height: 90px;
+
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
+
+            position: relative;
         }
 
-        /* Logo */
+        .logo {
+            width: 85px;
+            height: 85px;
 
-        .logoota {
-            width: 100px;
-            height: 100px;
             object-fit: cover;
             border-radius: 50%;
+
+            border: 3px solid #ffc107;
+        }
+
+        .logo-container {
+            position: absolute;
+            left: 0;
+        }
+
+        .titulo-header {
+            margin: 0;
+
+            color: white;
+
+            font-size: 30px;
+            font-weight: bold;
+
+            text-align: center;
+        }
+
+        .titulo-header::after {
+            content: "";
+
             display: block;
+
+            width: 60px;
+            height: 4px;
+
+            margin: 10px auto 0;
+
+            background-color: #ffc107;
+
+            border-radius: 10px;
         }
-
-        /* Área do menu */
-
-        .menu-header {
-            margin-left: auto;
-            display: flex;
-            align-items: center;
-        }
-
-        /* Botão Painel Administrador */
-
-        .btn-painel {
-            font-size: 16px;
-            padding: 10px 18px;
-            border-radius: 6px;
-        }
-
-        /* Menu dropdown */
-
-        .dropdown-menu {
-            margin-top: 8px !important;
-        }
-
 
         /* =========================
            CONTEÚDO
@@ -97,100 +109,140 @@ include "../../conexao.php";
 
         main {
             flex: 1;
+
             width: 100%;
-            padding: 50px 20px;
+
+            padding: 55px 20px 70px;
         }
 
-        .caixa-avaliacao {
-            background-color: white;
-            max-width: 800px;
+        .caixa-avaliacoes {
+            width: 100%;
+            max-width: 1000px;
+
             margin: 0 auto;
+
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+
+            background-color: #222;
+
+            border: 1px solid #444;
+            border-radius: 15px;
+
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
         }
 
-        .titulo-avaliacao {
-            text-align: center;
-            margin-bottom: 25px;
-            color: #333;
+        .titulo-avaliacoes {
+            margin-bottom: 35px;
+
+            color: white;
+
+            font-size: 30px;
             font-weight: bold;
+
+            text-align: center;
         }
 
+        .titulo-avaliacoes::after {
+            content: "";
+
+            display: block;
+
+            width: 60px;
+            height: 4px;
+
+            margin: 10px auto 0;
+
+            background-color: #ffc107;
+
+            border-radius: 10px;
+        }
 
         /* =========================
            TABELA
         ========================= */
 
-        .tabela-avaliacao {
+        .tabela-avaliacoes {
             width: 100%;
+
             margin-bottom: 0;
-            border-collapse: separate;
-            border-spacing: 0;
-            overflow: hidden;
+
+            background-color: #222;
+
             border-radius: 8px;
+
+            overflow: hidden;
         }
 
-        .tabela-avaliacao thead th {
-            background-color: #dc3545;
-            color: white;
+        .tabela-avaliacoes thead th {
             padding: 14px;
+
+            background-color: #ffc107;
+
+            color: #222;
+
             border: none;
-            text-align: left;
+
+            font-weight: bold;
         }
 
-        .tabela-avaliacao tbody td {
+        .tabela-avaliacoes tbody td {
             padding: 14px;
+
+            color: #333;
+
+            border-bottom: 1px solid #444;
+
             vertical-align: middle;
-            border-bottom: 1px solid #ddd;
         }
 
-        .tabela-avaliacao tbody tr:last-child td {
+        .tabela-avaliacoes tbody tr:hover {
+            background-color: #333;
+        }
+
+        .tabela-avaliacoes tbody tr:last-child td {
             border-bottom: none;
         }
 
-        .tabela-avaliacao tbody tr:hover {
-            background-color: #f8f8f8;
-        }
-
-        /* Coluna da avaliação */
-
-        .coluna-avaliacao {
-            width: 85%;
-        }
-
-        /* Coluna da lixeira */
-
         .coluna-acao {
-            width: 15%;
+            width: 100px;
+
             text-align: center !important;
         }
 
-        /* Ícone da lixeira */
+        /* =========================
+           BOTÃO EXCLUIR
+        ========================= */
+
+        .botao-excluir {
+            display: inline-flex;
+
+            padding: 4px;
+
+            background: transparent;
+
+            border: none;
+        }
 
         .icone-lixeira {
-            width: 22px !important;
-            height: 22px !important;
+            width: 22px;
+            height: 22px;
+
             object-fit: contain;
-            margin: 0;
-            transition: transform 0.2s;
+
+            transition: 0.2s;
         }
 
         .icone-lixeira:hover {
             transform: scale(1.15);
         }
 
-
-        /* =========================
-           MENSAGEM SEM AVALIAÇÕES
-        ========================= */
-
         .sem-avaliacoes {
-            text-align: center;
-            color: #777;
-            padding: 20px;
-        }
+            padding: 30px !important;
 
+            color: #aaa !important;
+
+            text-align: center;
+        }
 
         /* =========================
            RODAPÉ
@@ -198,423 +250,247 @@ include "../../conexao.php";
 
         .rodape {
             width: 100%;
-            background-color: #dc3545;
-            color: white;
-            padding: 40px 25px 20px;
+
             margin-top: auto;
+
+            padding: 35px 25px 20px;
+
+            background-color: #222;
+
+            border-top: 1px solid #444;
         }
 
         .rodape-container {
             width: 100%;
             max-width: 1200px;
+
             margin: 0 auto;
         }
 
-        .rodape h5 {
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-
-        .rodape p {
-            margin-bottom: 10px;
-        }
-
-        .rodape a {
-            color: white;
-            text-decoration: none;
-        }
-
-        .redes-sociais {
-            display: flex;
-            justify-content: flex-end;
-            gap: 20px;
-        }
-
-        .redes-sociais a {
-            font-size: 28px;
-            transition: transform 0.2s;
-        }
-
-        .redes-sociais a:hover {
-            transform: scale(1.15);
-        }
-
         .direitos {
-            border-top: 1px solid rgba(255, 255, 255, 0.4);
-            margin-top: 25px;
-            padding-top: 15px;
+            padding-top: 18px;
+
+            border-top: 1px solid rgba(255, 193, 7, 0.3);
+
+            color: #999;
+
+            font-size: 14px;
+
             text-align: center;
         }
 
-
         /* =========================
-           RESPONSIVIDADE
+           RESPONSIVO
         ========================= */
 
         @media (max-width: 768px) {
 
             header {
-                padding: 12px 15px;
+                padding: 15px;
             }
 
-            .logoota {
-                width: 75px;
-                height: 75px;
+            .header-content {
+                min-height: 150px;
+
+                flex-direction: column;
+
+                gap: 12px;
             }
 
-            .btn-painel {
-                font-size: 14px;
-                padding: 8px 12px;
+            .logo-container {
+                position: static;
+
+                order: 1;
+            }
+
+            .logo {
+                width: 70px;
+                height: 70px;
+            }
+
+            .titulo-header {
+                font-size: 23px;
+
+                order: 2;
             }
 
             main {
-                padding: 30px 15px;
+                padding: 40px 15px 55px;
             }
 
-            .caixa-avaliacao {
+            .caixa-avaliacoes {
                 padding: 20px;
+            }
+
+            .titulo-avaliacoes {
+                font-size: 25px;
             }
 
             .rodape {
                 text-align: center;
             }
-
-            .redes-sociais {
-                justify-content: center;
-            }
-
         }
-
     </style>
-
 </head>
 
 <body>
 
+    <!-- =========================
+         CABEÇALHO
+    ========================= -->
 
-<!-- =========================
-     CABEÇALHO
-========================= -->
+    <header>
 
-<header>
+        <div class="header-content">
 
-    <div class="header-content">
+            <div class="logo-container">
 
-        <!-- LOGO -->
+                <a href="../menu.php">
 
-        <a href="../menu.php">
+                    <img
+                        src="../../imagens/logoota.jpeg"
+                        class="logo"
+                        alt="Logo OTA"
+                    >
 
-            <img
-                class="logoota"
-                src="../../imagens/logoota.jpeg"
-                alt="Logo OTA">
-
-        </a>
-
-
-        <!-- MENU -->
-
-        <div class="menu-header">
-
-            <div class="dropdown">
-
-                <button
-                    class="btn btn-light dropdown-toggle btn-painel"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false">
-
-                    Painel Administrador
-
-                </button>
-
-
-                <ul class="dropdown-menu dropdown-menu-end">
-
-                    <li>
-                        <a
-                            class="dropdown-item"
-                            href="../adm/FormAdm.php">
-
-                            Acesso Admin
-
-                        </a>
-                    </li>
-
-
-                    <li>
-                        <a
-                            class="dropdown-item"
-                            href="../produto/FormProd.php">
-
-                            Acesso Produtos
-
-                        </a>
-                    </li>
-
-
-                    <li>
-                        <a
-                            class="dropdown-item"
-                            href="../horario_funcionamento/FormHora.php">
-
-                            Acesso H. Funcionamento
-
-                        </a>
-                    </li>
-
-
-                    <li>
-                        <a
-                            class="dropdown-item"
-                            href="../avaliacao/VizuAva.php">
-
-                            Acesso Avaliação
-
-                        </a>
-                    </li>
-
-                </ul>
+                </a>
 
             </div>
 
-              <!-- PAINEL ADMINISTRADOR -->
-
-            <div class="menu-header">
-
-                <div class="dropdown">
-
-                    <button
-                        class="btn btn-light dropdown-toggle btn-painel"
-                        type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false">
-
-                        Listagem dos Cadastros
-
-                    </button>
-
-
-                    <ul class="dropdown-menu dropdown-menu-end">
-
-                        <li>
-
-                            <a
-                                class="dropdown-item"
-                                href="../adm/VizuAdm.php">
-
-                                Acesso Admin
-
-                            </a>
-
-                        </li>
-
-
-                        <li>
-
-                            <a
-                                class="dropdown-item"
-                                href="../produto/pastel.php">
-
-                                Acesso Pastel
-
-                            </a>
-
-                        </li>
-
-                          <li>
-
-                            <a
-                                class="dropdown-item"
-                                href="../produto/bebidas.php">
-
-                                Acesso Bebidas
-
-                            </a>
-
-                        </li>
-
-                          <li>
-
-                            <a
-                                class="dropdown-item"
-                                href="../produto/massas.php">
-
-                                Acesso Massas
-
-                            </a>
-
-                        </li>
-
-
-                        <li>
-
-                            <a
-                                class="dropdown-item"
-                                href="../horario_funcionamento/VizuHora.php">
-
-                                Acesso H. Funcionamento
-
-                            </a>
-
-                        </li>
-
-
-                    </ul>
-
-                </div>
+            <h1 class="titulo-header">
+                Avaliações
+            </h1>
 
         </div>
 
-    </div>
-
-</header>
+    </header>
 
 
+    <!-- =========================
+         CONTEÚDO
+    ========================= -->
 
-<!-- =========================
-     CONTEÚDO PRINCIPAL
-========================= -->
+    <main>
 
-<main>
+        <div class="caixa-avaliacoes">
 
-    <div class="caixa-avaliacao">
+            <h2 class="titulo-avaliacoes">
+                Avaliações cadastradas
+            </h2>
 
-        <h2 class="titulo-avaliacao">
-            Avaliações
-        </h2>
+            <div class="table-responsive">
 
+                <table class="table tabela-avaliacoes">
 
-        <div class="table-responsive">
+                    <thead>
 
-            <table class="table tabela-avaliacao">
+                        <tr>
 
-                <thead>
+                            <th>
+                                Avaliação
+                            </th>
 
-                    <tr>
+                            <th class="coluna-acao">
+                                Ação
+                            </th>
 
-                        <th class="coluna-avaliacao">
-                            Avaliação
-                        </th>
+                        </tr>
 
-                        <th class="coluna-acao">
-                            Ação
-                        </th>
+                    </thead>
 
-                    </tr>
+                    <tbody>
 
-                </thead>
+                        <?php if ($result && $result->num_rows > 0): ?>
 
+                            <?php while ($row = $result->fetch_assoc()): ?>
 
-                <tbody>
+                                <?php
+                                $id_ava = (int) $row['id_ava'];
 
-                    <?php
+                                $avaliacao = htmlspecialchars(
+                                    $row['avaliacao'],
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                );
+                                ?>
 
-                    /* Busca as avaliações no banco */
+                                <tr>
 
-                    $sql = "SELECT * FROM avaliacao";
+                                    <td>
+                                        <?= $avaliacao ?>
+                                    </td>
 
-                    $result = $conn->query($sql);
+                                    <td class="coluna-acao">
 
+                                        <a
+                                            href="deleteAva.php?id_ava=<?= $id_ava ?>"
+                                            class="botao-excluir"
+                                            title="Excluir avaliação"
+                                            onclick="return confirm(
+                                                'Deseja realmente excluir esta avaliação?'
+                                            );"
+                                        >
 
-                    if ($result && $result->num_rows > 0) {
+                                            <img
+                                                src="../../imagens/lixo.png"
+                                                class="icone-lixeira"
+                                                alt="Excluir"
+                                            >
 
-                        while ($row = $result->fetch_assoc()) {
+                                        </a>
 
-                            $id_ava = $row['id_ava'];
+                                    </td>
 
-                            echo "
+                                </tr>
+
+                            <?php endwhile; ?>
+
+                        <?php else: ?>
 
                             <tr>
 
-                                <td>
-                                    {$row['avaliacao']}
-                                </td>
-
-                                <td class='coluna-acao'>
-
-                                    <a
-                                        href='deleteAva.php?id_ava=$id_ava'
-                                        onclick=\"return confirm('Deseja realmente excluir a Avaliação {$row['avaliacao']}?');\">
-
-                                        <img
-                                            class='icone-lixeira'
-                                            src='../../imagens/lixo.png'
-                                            alt='Excluir avaliação'>
-
-                                    </a>
-
+                                <td
+                                    colspan="2"
+                                    class="sem-avaliacoes"
+                                >
+                                    Nenhuma avaliação cadastrada.
                                 </td>
 
                             </tr>
 
-                            ";
+                        <?php endif; ?>
 
-                        }
+                    </tbody>
 
-                    } else {
+                </table>
 
-                        echo "
-
-                        <tr>
-
-                            <td
-                                colspan='2'
-                                class='sem-avaliacoes'>
-
-                                Nenhuma avaliação cadastrada.
-
-                            </td>
-
-                        </tr>
-
-                        ";
-
-                    }
-
-                    ?>
-
-                </tbody>
-
-            </table>
+            </div>
 
         </div>
 
-    </div>
-
-</main>
+    </main>
 
 
+    <!-- =========================
+         RODAPÉ
+    ========================= -->
 
-  <!-- =========================
-     RODAPÉ
-========================= -->
+    <footer class="rodape">
 
-<footer class="rodape">
+        <div class="rodape-container">
 
-<div class="rodape-container">
+            <div class="direitos">
+                © 2026 Pastelaria OTA - Todos os direitos reservados.
+            </div>
 
-    <div class="row">
+        </div>
 
-
-    <!-- DIREITOS -->
-
-    <div class="direitos">
-
-        © 2026 Pastelaria OTA - Todos os direitos reservados.
-
-    </div>
-
-</div>
-
-</footer>
+    </footer>
 
 
+    <!-- Bootstrap JS -->
 
-<!-- Bootstrap JS -->
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
-</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

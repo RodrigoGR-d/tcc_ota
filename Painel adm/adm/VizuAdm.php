@@ -1,32 +1,26 @@
 <?php
-/* Aqui virá o código de busca utilizando o comando SQL */
+
 include "../../conexao.php";
+
+$sql = "SELECT * FROM adm ORDER BY nome_adm ASC";
+$result = $conn->query($sql);
+
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Avaliação</title>
+    <title>Administradores</title>
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
         rel="stylesheet">
 
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-
     <style>
-
-        /* =========================
-           CONFIGURAÇÕES GERAIS
-        ========================= */
-
         * {
             box-sizing: border-box;
         }
@@ -34,161 +28,179 @@ include "../../conexao.php";
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
+            background-color: #333;
+            color: white;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
-
 
         /* =========================
            CABEÇALHO
         ========================= */
 
         header {
-            background-color: #dc3545;
-            width: 100%;
+            background-color: #222;
             padding: 15px 25px;
+            border-bottom: 1px solid #444;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
         }
 
         .header-content {
-            width: 100%;
+            min-height: 90px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
+            position: relative;
         }
 
-        /* Logo */
+        .logo-container {
+            position: absolute;
+            left: 0;
+        }
 
-        .logoota {
-            width: 100px;
-            height: 100px;
+        .logo {
+            width: 85px;
+            height: 85px;
             object-fit: cover;
             border-radius: 50%;
+            border: 3px solid #ffc107;
+        }
+
+        .tituloheader {
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            margin: 0;
+            text-align: center;
+        }
+
+        .tituloheader::after,
+        .titulo-adm::after {
+            content: "";
             display: block;
+            width: 60px;
+            height: 4px;
+            background-color: #ffc107;
+            border-radius: 10px;
+            margin: 10px auto 0;
         }
 
-        /* Área do menu */
+        /* =========================
+           CONTEÚDO
+        ========================= */
 
-        .menu-header {
-            margin-left: auto;
+        main {
+            flex: 1;
+            padding: 55px 20px 70px;
+        }
+
+        .caixa-adm {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #222;
+            border: 1px solid #444;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .titulo-adm {
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .area-botao {
             display: flex;
-            align-items: center;
+            justify-content: flex-end;
+            margin-bottom: 20px;
         }
 
-        /* Botão Painel Administrador */
-
-        .btn-painel {
-            font-size: 16px;
-            padding: 10px 18px;
-            border-radius: 6px;
+        .btn-adicionar {
+            padding: 11px 18px;
+            background-color: #ffc107;
+            color: #222;
+            font-weight: bold;
+            border: 0;
+            border-radius: 8px;
+            text-decoration: none;
         }
 
-        /* Menu dropdown */
-
-        .dropdown-menu {
-            margin-top: 8px !important;
+        .btn-adicionar:hover {
+            background-color: #e0a800;
+            color: #222;
         }
 
- /* =========================
+        /* =========================
            TABELA
         ========================= */
 
-        .caixa-tabela {
-            background-color: white;
-
-            max-width: 1100px;
-            margin: 40px auto 0;
-
-            padding: 30px;
-
-            border-radius: 12px;
-
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-        }
-
-        .titulo-tabela {
-            text-align: center;
-
-            margin-bottom: 25px;
-
-            color: #333;
-            font-weight: bold;
+        .tabela-container {
+            width: 100%;
+            overflow-x: auto;
         }
 
         .tabela-adm {
             width: 100%;
-            margin-bottom: 0;
-
+            margin: 0;
             border-collapse: separate;
             border-spacing: 0;
-
-            overflow: hidden;
             border-radius: 8px;
+            overflow: hidden;
+            background-color: #fff;
         }
 
-        /* Cabeçalho */
-
         .tabela-adm thead th {
-            background-color: #dc3545;
-            color: white;
-
             padding: 14px;
-
-            border: none;
-
-            text-align: left;
+            background-color: #ffc107;
+            color: #000;
+            border: 0;
+            text-align: center;
             white-space: nowrap;
         }
 
-        /* Dados */
-
         .tabela-adm tbody td {
             padding: 14px;
-
             vertical-align: middle;
-
             border-bottom: 1px solid #ddd;
+            text-align: center;
+            color: #000;
         }
 
         .tabela-adm tbody tr:last-child td {
-            border-bottom: none;
+            border-bottom: 0;
         }
 
-        .tabela-adm tbody tr:hover {
-            background-color: #f8f8f8;
+        .tabela-adm tbody tr:hover td {
+            background-color: #f2f2f2;
+            color: #000;
         }
-
 
         /* =========================
-           COLUNA DE AÇÕES
+           AÇÕES
         ========================= */
 
         .coluna-acao {
-            width: 110px;
-            text-align: center !important;
+            width: 120px;
             white-space: nowrap;
         }
 
         .acao {
             display: inline-flex;
-
             align-items: center;
             justify-content: center;
-
             margin: 0 5px;
-
             text-decoration: none;
         }
 
         .icone-acao {
-            width: 22px !important;
-            height: 22px !important;
-
+            width: 24px;
+            height: 24px;
             object-fit: contain;
-
-            margin: 0;
-
             transition: transform 0.2s;
         }
 
@@ -196,472 +208,267 @@ include "../../conexao.php";
             transform: scale(1.15);
         }
 
+        .mensagem-vazia {
+            padding: 30px;
+            text-align: center;
+            color: #000;
+        }
 
         /* =========================
            RODAPÉ
         ========================= */
 
         .rodape {
-            width: 100%;
-            background-color: #dc3545;
-            color: white;
-            padding: 40px 25px 20px;
             margin-top: auto;
-        }
-
-        .rodape-container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .rodape h5 {
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-
-        .rodape p {
-            margin-bottom: 10px;
-        }
-
-        .rodape a {
+            padding: 35px 25px 20px;
+            background-color: #222;
             color: white;
-            text-decoration: none;
-        }
-
-        .redes-sociais {
-            display: flex;
-            justify-content: flex-end;
-            gap: 20px;
-        }
-
-        .redes-sociais a {
-            font-size: 28px;
-            transition: transform 0.2s;
-        }
-
-        .redes-sociais a:hover {
-            transform: scale(1.15);
+            border-top: 1px solid #444;
         }
 
         .direitos {
-            border-top: 1px solid rgba(255, 255, 255, 0.4);
-            margin-top: 25px;
-            padding-top: 15px;
+            margin-top: 10px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 193, 7, 0.3);
             text-align: center;
+            color: #999;
+            font-size: 14px;
         }
 
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal-content {
+            border-radius: 12px;
+        }
 
         /* =========================
-           RESPONSIVIDADE
+           RESPONSIVO
         ========================= */
 
         @media (max-width: 768px) {
-
             header {
-                padding: 12px 15px;
+                padding: 15px;
             }
 
-            .logoota {
-                width: 75px;
-                height: 75px;
+            .header-content {
+                min-height: 150px;
+                flex-direction: column;
+                gap: 12px;
             }
 
-            .btn-painel {
-                font-size: 14px;
-                padding: 8px 12px;
+            .logo-container {
+                position: static;
+            }
+
+            .logo {
+                width: 70px;
+                height: 70px;
+            }
+
+            .tituloheader {
+                font-size: 23px;
             }
 
             main {
                 padding: 30px 15px;
             }
 
-            .caixa-avaliacao {
+            .caixa-adm {
                 padding: 20px;
             }
-
-            .rodape {
-                text-align: center;
-            }
-
-            .redes-sociais {
-                justify-content: center;
-            }
-
         }
-
     </style>
-
 </head>
 
 <body>
 
-
-<!-- =========================
-     CABEÇALHO
-========================= -->
-
-<header>
-
-    <div class="header-content">
-
-        <!-- LOGO -->
-
-        <a href="../menu.php">
-
-            <img
-                class="logoota"
-                src="../../imagens/logoota.jpeg"
-                alt="Logo OTA">
-
-        </a>
-
-
-        <!-- MENU -->
-
-        <div class="menu-header">
-
-            <div class="dropdown">
-
-                <button
-                    class="btn btn-light dropdown-toggle btn-painel"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false">
-
-                    Painel Administrador
-
-                </button>
-
-
-                <ul class="dropdown-menu dropdown-menu-end">
-
-                    <li>
-                        <a
-                            class="dropdown-item"
-                            href="../adm/FormAdm.php">
-
-                            Acesso Admin
-
-                        </a>
-                    </li>
-
-
-                    <li>
-                        <a
-                            class="dropdown-item"
-                            href="../produto/FormProd.php">
-
-                            Acesso Produtos
-
-                        </a>
-                    </li>
-
-
-                    <li>
-                        <a
-                            class="dropdown-item"
-                            href="../horario_funcionamento/FormHora.php">
-
-                            Acesso H. Funcionamento
-
-                        </a>
-                    </li>
-
-
-                    <li>
-                        <a
-                            class="dropdown-item"
-                            href="../avaliacao/VizuAva.php">
-
-                            Acesso Avaliação
-
-                        </a>
-                    </li>
-
-                </ul>
-
+    <header>
+        <div class="header-content">
+            <div class="logo-container">
+                <a href="../menu.php">
+                    <img
+                        class="logo"
+                        src="../../imagens/logoota.jpeg"
+                        alt="Logo OTA">
+                </a>
             </div>
 
-              <!-- PAINEL ADMINISTRADOR -->
+            <h1 class="tituloheader">Administradores</h1>
+        </div>
+    </header>
 
-            <div class="menu-header">
+    <main>
+        <div class="caixa-adm">
 
-                <div class="dropdown">
+            <h2 class="titulo-adm">Lista de Administradores</h2>
 
-                    <button
-                        class="btn btn-light dropdown-toggle btn-painel"
-                        type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false">
+            <div class="area-botao">
+                <a href="formAdm.php" class="btn-adicionar">
+                    + Adicionar administrador
+                </a>
+            </div>
 
-                        Listagem dos Cadastros
+            <div class="tabela-container">
+                <table class="tabela-adm">
+                    <thead>
+                        <tr>
+                            <th>CPF</th>
+                            <th>Nome</th>
+                            <th>E-mail</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
 
-                    </button>
+                    <tbody>
+                        <?php if ($result && $result->num_rows > 0): ?>
 
+                            <?php while ($adm = $result->fetch_assoc()): ?>
 
-                    <ul class="dropdown-menu dropdown-menu-end">
+                                <?php $cpf = htmlspecialchars($adm['cpf_adm']); ?>
 
-                        <li>
+                                <tr>
+                                    <td><?= $cpf ?></td>
+                                    <td><?= htmlspecialchars($adm['nome_adm']) ?></td>
+                                    <td><?= htmlspecialchars($adm['email_adm']) ?></td>
 
-                            <a
-                                class="dropdown-item"
-                                href="VizuAdm.php">
+                                    <td class="coluna-acao">
+                                        <a
+                                            href="#"
+                                            class="acao"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#modalEditar<?= $cpf ?>">
+                                            <img
+                                                class="icone-acao"
+                                                src="../../imagens/lapis.png"
+                                                alt="Editar">
+                                        </a>
 
-                                Acesso Admin
+                                        <a
+                                            href="deleteAdm.php?cpf_adm=<?= urlencode($adm['cpf_adm']) ?>"
+                                            class="acao"
+                                            onclick="return confirm('Deseja excluir este administrador?');">
+                                            <img
+                                                class="icone-acao"
+                                                src="../../imagens/lixeira.png"
+                                                alt="Excluir">
+                                        </a>
+                                    </td>
+                                </tr>
 
-                            </a>
+                                <!-- Modal de edição -->
+                                <div
+                                    class="modal fade"
+                                    id="modalEditar<?= $cpf ?>"
+                                    tabindex="-1"
+                                    aria-hidden="true">
 
-                        </li>
+                                    <div class="modal-dialog">
+                                        <div class="modal-content text-dark">
 
+                                            <form action="updateAdm.php" method="POST">
 
-                        <li>
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Editar administrador</h5>
 
-                            <a
-                                class="dropdown-item"
-                                href="../produto/pastel.php">
+                                                    <button
+                                                        type="button"
+                                                        class="btn-close"
+                                                        data-bs-dismiss="modal">
+                                                    </button>
+                                                </div>
 
-                                Acesso Pastel
+                                                <div class="modal-body">
 
-                            </a>
+                                                    <div class="mb-3">
+                                                        <label class="form-label">CPF</label>
+                                                        <input
+                                                            type="text"
+                                                            class="form-control"
+                                                            name="cpf_adm"
+                                                            value="<?= $cpf ?>"
+                                                            readonly>
+                                                    </div>
 
-                        </li>
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Nome</label>
+                                                        <input
+                                                            type="text"
+                                                            class="form-control"
+                                                            name="nome_adm"
+                                                            value="<?= htmlspecialchars($adm['nome_adm']) ?>"
+                                                            required>
+                                                    </div>
 
-                          <li>
+                                                    <div class="mb-3">
+                                                        <label class="form-label">E-mail</label>
+                                                        <input
+                                                            type="email"
+                                                            class="form-control"
+                                                            name="email_adm"
+                                                            value="<?= htmlspecialchars($adm['email_adm']) ?>"
+                                                            required>
+                                                    </div>
 
-                            <a
-                                class="dropdown-item"
-                                href="../produto/bebidas.php">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Senha</label>
+                                                        <input
+                                                            type="text"
+                                                            class="form-control"
+                                                            name="senha_adm"
+                                                            value="<?= htmlspecialchars($adm['senha_adm']) ?>"
+                                                            required>
+                                                    </div>
 
-                                Acesso Bebidas
+                                                </div>
 
-                            </a>
+                                                <div class="modal-footer">
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">
+                                                        Cancelar
+                                                    </button>
 
-                        </li>
+                                                    <button
+                                                        type="submit"
+                                                        class="btn btn-warning">
+                                                        Salvar alterações
+                                                    </button>
+                                                </div>
 
-                          <li>
+                                            </form>
 
-                            <a
-                                class="dropdown-item"
-                                href="../produto/massas.php">
+                                        </div>
+                                    </div>
+                                </div>
 
-                                Acesso Massas
+                            <?php endwhile; ?>
 
-                            </a>
+                        <?php else: ?>
 
-                        </li>
+                            <tr>
+                                <td colspan="4" class="mensagem-vazia">
+                                    Nenhum administrador cadastrado.
+                                </td>
+                            </tr>
 
-
-                        <li>
-
-                            <a
-                                class="dropdown-item"
-                                href="../horario_funcionamento/VizuHora.php">
-
-                                Acesso H. Funcionamento
-
-                            </a>
-
-                        </li>
-
-
-                    </ul>
-
-                </div>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
 
         </div>
-
-    </div>
-
-</header>
-
-
-
-<!-- =========================
-     CONTEÚDO PRINCIPAL
-========================= -->
-
-<main>
-
-<div class="caixa-tabela">
-
-<h2 class="titulo-tabela">
-    Administradores cadastrados
-</h2>
-
-
-<div class="table-responsive">
-
-    <table class="table tabela-adm">
-
-        <thead>
-
-            <tr>
-
-                <th>
-                    CPF
-                </th>
-
-                <th>
-                    Nome
-                </th>
-
-                <th>
-                    Email
-                </th>
-
-               
-
-                <th class="coluna-acao">
-                    Ação
-                </th>
-
-            </tr>
-
-        </thead>
-
-
-        <tbody>
-
-            <?php
-
-            /* Busca os administradores no banco */
-
-            $sql = "SELECT * FROM adm";
-
-            $result = $conn->query($sql);
-
-
-            if ($result && $result->num_rows > 0) {
-
-                while ($row = $result->fetch_assoc()) {
-
-                    $cpf_adm = $row['cpf_adm'];
-
-
-                    echo "
-
-                <tr>
-
-                    <td>
-                        {$row['cpf_adm']}
-                    </td>
-
-                    <td>
-                        {$row['nome_adm']}
-                    </td>
-
-                    <td>
-                        {$row['email_adm']}
-                    </td>
-
-                  
-
-
-                    <td class='coluna-acao'>
-
-                        <!-- EDITAR -->
-
-                        <a
-                            class='acao'
-                            href='editarAdm.php?cpf_adm=$cpf_adm'
-                            title='Editar administrador'>
-
-                            <img
-                                class='icone-acao'
-                                src='../../imagens/lapis.png'
-                                alt='Editar'>
-
-                        </a>
-
-
-                        <!-- EXCLUIR -->
-
-                        <a
-                            class='acao'
-                            href='deleteAdm.php?cpf_adm=$cpf_adm'
-                            title='Excluir administrador'
-                            onclick=\"return confirm('Deseja realmente excluir o administrador {$row['nome_adm']}?');\">
-
-                            <img
-                                class='icone-acao'
-                                src='../../imagens/lixeira.png'
-                                alt='Excluir'>
-
-                        </a>
-
-                    </td>
-
-                </tr>
-
-                ";
-
-                }
-
-            } else {
-
-                echo "
-
-            <tr>
-
-                <td
-                    colspan='5'
-                    class='sem-administradores'>
-
-                    Nenhum administrador cadastrado.
-
-                </td>
-
-            </tr>
-
-            ";
-
-            }
-
-            ?>
-
-        </tbody>
-
-    </table>
-
-</div>
-
-</div>
-
-</main>
-
-
-
-  <!-- =========================
-     RODAPÉ
-========================= -->
-
-<footer class="rodape">
-
-<div class="rodape-container">
-
-    <div class="row">
-
-
-    <!-- DIREITOS -->
-
-    <div class="direitos">
-
-        © 2026 Pastelaria OTA - Todos os direitos reservados.
-
-    </div>
-
-</div>
-
-</footer>
-
-
-
-<!-- Bootstrap JS -->
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
-</script>
+    </main>
+
+    <footer class="rodape">
+        <div class="direitos">
+            © 2026 Pastelaria OTA - Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
-
 </html>

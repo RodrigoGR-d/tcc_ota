@@ -765,7 +765,7 @@
                 <div class="col-12 col-sm-6 col-lg-6">
 
                     <a
-                        href="adm/formAdm.php"
+                        href="adm/vizuAdm.php"
                         class="card-acesso">
 
                         <i class="bi bi-person-plus"></i>
@@ -787,7 +787,7 @@
                 <div class="col-6 col-sm-6 col-lg-6">
 
                     <a
-                        href="produto/formProd.php"
+                        href="produto/vizuprod.php"
                         class="card-acesso">
 
                         <i class="bi bi-shop"></i>
@@ -809,7 +809,7 @@
                 <div class="col-6 col-sm-6 col-lg-6">
 
                     <a
-                        href="horario_funcionamento/formHora.php"
+                        href="horario_funcionamento/vizuHora.php"
                         class="card-acesso">
 
                         <i class="bi bi-clock"></i>

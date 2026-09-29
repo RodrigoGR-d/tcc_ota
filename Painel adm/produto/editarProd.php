@@ -32,331 +32,350 @@ $produto = $result->fetch_assoc();
 
     <style>
 
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
+            background-color: #333;
+            color: white;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-
-        /* =========================
-           CABEÇALHO
-        ========================= */
-
         header {
-            background-color: #dc3545;
+            background-color: #222;
             width: 100%;
             padding: 15px 25px;
+            border-bottom: 1px solid #444;
+            box-shadow: 0 4px 15px rgba(0,0,0,.25);
         }
 
         .header-content {
             width: 100%;
-            min-height: 70px;
-
+            min-height: 90px;
             display: flex;
             align-items: center;
             justify-content: center;
-
             position: relative;
         }
 
+        .logo {
+            width: 85px;
+            height: 85px;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+            border: 3px solid #ffc107;
+        }
 
-        /* =========================
-           LOGO
-        ========================= */
-
+        .header-content > a,
         .logo-container {
             position: absolute;
             left: 0;
-
             display: flex;
             align-items: center;
         }
-
-        .logo {
-            width: 100px;
-            height: 100px;
-
-            object-fit: cover;
-
-            border-radius: 50%;
-
-            display: block;
-        }
-
-
-        /* =========================
-           TÍTULO
-        ========================= */
 
         .tituloheader {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
             color: white;
-
-            font-size: 32px;
-
+            font-size: 30px;
             font-weight: bold;
-
             margin: 0;
-
             text-align: center;
+            white-space: nowrap;
         }
 
-
-        /* =========================
-           MENUS DO LADO DIREITO
-        ========================= */
+        .tituloheader::after {
+            content: "";
+            display: block;
+            width: 55px;
+            height: 4px;
+            background-color: #ffc107;
+            border-radius: 10px;
+            margin: 8px auto 0;
+        }
 
         .menu-header {
-            position: absolute;
-            right: 0;
-
+            margin-left: auto;
             display: flex;
             align-items: center;
+            justify-content: flex-end;
             gap: 10px;
+            flex-wrap: wrap;
         }
 
         .btn-painel {
-            font-size: 16px;
+            font-size: 15px !important;
+            font-weight: bold !important;
+            padding: 11px 18px !important;
+            border-radius: 8px !important;
+            background-color: #ffc107 !important;
+            color: #222 !important;
+            border: none !important;
+            transition: .3s;
+        }
 
-            padding: 10px 18px;
-
-            border-radius: 6px;
+        .btn-painel:hover {
+            background-color: #e0a800 !important;
+            color: #222 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255,193,7,.18);
         }
 
         .dropdown-menu {
-            margin-top: 8px !important;
+            margin-top: 10px !important;
+            background-color: #222;
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,.35);
         }
 
+        .dropdown-item {
+            color: #ddd;
+            border-radius: 7px;
+            padding: 10px 13px;
+            transition: .2s;
+        }
 
-        /* =========================
-           CONTEÚDO
-        ========================= */
+        .dropdown-item:hover {
+            background-color: #dc3545;
+            color: white;
+        }
 
         main {
             flex: 1;
-
             width: 100%;
-
-            padding: 45px 20px 60px;
+            padding: 55px 20px 70px;
         }
 
-
-        /* =========================
-           CARD DO FORMULÁRIO
-        ========================= */
-
-        .caixa-formulario {
-            background-color: white;
-
-            width: 100%;
-            max-width: 800px;
-
-            margin: 0 auto;
-
-            padding: 30px;
-
-            border-radius: 12px;
-
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-        }
-
-
-        /* =========================
-           TÍTULO DO FORMULÁRIO
-        ========================= */
-
+        .titulo-produtos,
         .titulo-formulario {
             text-align: center;
+            margin-bottom: 35px;
+            color: white;
+            font-weight: bold;
+            font-size: 30px;
+        }
 
-            margin-bottom: 25px;
+        .titulo-produtos::after,
+        .titulo-formulario::after {
+            content: "";
+            display: block;
+            width: 65px;
+            height: 4px;
+            background-color: #ffc107;
+            border-radius: 10px;
+            margin: 12px auto 0;
+        }
 
-            color: #333;
+        .caixa-produtos,
+        .caixa-formulario {
+            background-color: #222;
+            color: white;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #444;
+            box-shadow: 0 8px 20px rgba(0,0,0,.25);
+        }
 
+        .caixa-formulario { max-width: 800px; }
+
+        .tabela-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .tabela-produtos {
+            width: 100%;
+            margin-bottom: 0;
+            border-collapse: separate;
+            border-spacing: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            background-color: #222;
+        }
+
+        .tabela-produtos thead th {
+            background-color: #ffc107;
+            color: #222;
+            padding: 14px;
+            border: none;
+            text-align: center;
+            white-space: nowrap;
             font-weight: bold;
         }
 
+        .tabela-produtos tbody td {
+            padding: 14px;
+            vertical-align: middle;
+            border-bottom: 1px solid #444;
+            text-align: center;
+            color: #ddd;
+        }
 
-        /* =========================
-           FORMULÁRIO
-        ========================= */
+        .tabela-produtos tbody tr:last-child td { border-bottom: none; }
+        .tabela-produtos tbody tr:hover { background-color: #333; }
+
+        .coluna-acao {
+            width: 120px;
+            text-align: center !important;
+            white-space: nowrap;
+        }
+
+        .acao {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 5px;
+            text-decoration: none;
+        }
+
+        .icone-acao {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+            transition: transform .2s;
+        }
+
+        .icone-acao:hover { transform: scale(1.15); }
+
+        .mensagem-vazia,
+        .sem-produtos {
+            text-align: center;
+            padding: 30px;
+            color: #aaa;
+            font-size: 17px;
+        }
 
         .form-label {
             font-weight: 500;
+            color: #eee;
         }
 
         .form-control,
         .form-select {
             border-radius: 7px;
+            background-color: #333;
+            color: white;
+            border: 1px solid #555;
         }
+
+        .form-control::placeholder { color: #aaa; }
 
         .form-control:focus,
         .form-select:focus {
-            border-color: #dc3545;
-
-            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.15);
+            border-color: #ffc107;
+            box-shadow: 0 0 0 .2rem rgba(255,193,7,.15);
+            background-color: #333;
+            color: white;
         }
 
-
-        /* =========================
-           BOTÕES
-        ========================= */
+        .form-select option {
+            background-color: #222;
+            color: white;
+        }
 
         .botoes-formulario {
             display: flex;
-
             justify-content: center;
-
             gap: 10px;
-
             margin-top: 25px;
         }
 
-        .botoes-formulario .btn {
-            min-width: 120px;
-        }
-
-
-        /* =========================
-           RODAPÉ
-        ========================= */
+        .botoes-formulario .btn { min-width: 120px; }
 
         .rodape {
             width: 100%;
-
-            background-color: #dc3545;
-
+            background-color: #222;
             color: white;
-
-            padding: 40px 25px 20px;
-
+            padding: 35px 25px 20px;
             margin-top: auto;
+            border-top: 1px solid #444;
         }
 
         .rodape-container {
             width: 100%;
-
             max-width: 1200px;
-
             margin: 0 auto;
         }
 
-        .rodape h5 {
-            margin-bottom: 20px;
-
-            font-weight: bold;
-        }
-
-        .rodape p {
-            margin-bottom: 10px;
-        }
-
-        .rodape a {
-            color: white;
-
-            text-decoration: none;
-        }
-
-
-        /* =========================
-           REDES SOCIAIS
-        ========================= */
-
-        .redes-sociais {
-            display: flex;
-
-            justify-content: flex-end;
-
-            gap: 20px;
-        }
-
-        .redes-sociais a {
-            font-size: 28px;
-
-            transition: transform 0.2s;
-        }
-
-        .redes-sociais a:hover {
-            transform: scale(1.15);
-        }
-
-
-        /* =========================
-           DIREITOS
-        ========================= */
+        .rodape h5 { margin-bottom: 20px; font-weight: bold; }
+        .rodape p { margin-bottom: 10px; }
+        .rodape a { color: white; text-decoration: none; }
 
         .direitos {
-            border-top: 1px solid rgba(255, 255, 255, 0.4);
-
-            margin-top: 25px;
-
-            padding-top: 15px;
-
+            border-top: 1px solid rgba(255,193,7,.3);
+            margin-top: 10px;
+            padding-top: 18px;
             text-align: center;
+            color: #999;
+            font-size: 14px;
         }
 
-
-        /* =========================
-           RESPONSIVIDADE
-        ========================= */
-
         @media (max-width: 768px) {
-
-            header {
-                padding: 15px;
-            }
+            header { padding: 15px; }
 
             .header-content {
-                min-height: 70px;
+                min-height: 150px;
+                flex-direction: column;
+                gap: 12px;
             }
 
+            .header-content > a,
             .logo-container {
                 position: static;
-
-                margin-right: 15px;
+                margin: 0;
             }
 
-            .logo {
-                width: 70px;
-                height: 70px;
-            }
+            .logo { width: 70px; height: 70px; }
 
             .tituloheader {
-                font-size: 24px;
+                position: static;
+                transform: none;
+                font-size: 23px;
+                order: 2;
             }
 
             .menu-header {
-                position: static;
+                margin-left: 0;
+                justify-content: center;
+                order: 3;
             }
 
             .btn-painel {
-                font-size: 14px;
-
-                padding: 8px 12px;
+                font-size: 14px !important;
+                padding: 8px 12px !important;
             }
 
-            main {
-                padding: 35px 15px 50px;
+            main { padding: 40px 15px 55px; }
+
+            .titulo-produtos,
+            .titulo-formulario {
+                font-size: 25px;
+                margin-bottom: 35px;
             }
 
-            .caixa-formulario {
-                padding: 25px 20px;
-            }
+            .caixa-produtos,
+            .caixa-formulario { padding: 20px; }
 
-            .rodape {
-                text-align: center;
-            }
+            .tabela-produtos { min-width: 650px; }
 
-            .redes-sociais {
-                justify-content: center;
-            }
+            .rodape { text-align: center; }
+        }
 
+        @media (max-width: 480px) {
+            .tituloheader { font-size: 21px; }
+            .titulo-produtos,
+            .titulo-formulario { font-size: 23px; }
         }
 
     </style>

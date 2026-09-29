@@ -21,424 +21,52 @@ include "../../conexao.php";
 
 
     <style>
-        /* =========================
-           CONFIGURAÇÕES GERAIS
-        ========================= */
 
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-
-            min-height: 100vh;
-
-            display: flex;
-            flex-direction: column;
-        }
-
-
-        /* =========================
-           CABEÇALHO
-        ========================= */
-
-        header {
-            background-color: #dc3545;
-            width: 100%;
-
-            padding: 15px 25px;
-        }
-
-        .header-content {
-            width: 100%;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-
-        /* LOGO */
-
-        .logo {
-            width: 100px;
-            height: 100px;
-
-            object-fit: cover;
-
-            border-radius: 50%;
-
-            display: block;
-        }
-
-
-        /* MENU */
-
-        .menu-header {
-            margin-left: auto;
-
-            display: flex;
-            align-items: center;
-        }
-
-        .btn-painel {
-            font-size: 16px;
-
-            padding: 10px 18px;
-
-            border-radius: 6px;
-        }
-
-        .dropdown-menu {
-            margin-top: 8px !important;
-        }
-
-
-        /* =========================
-           CONTEÚDO
-        ========================= */
-
-        main {
-            flex: 1;
-
-            width: 100%;
-
-            padding: 40px 20px 50px;
-        }
-
-
-        /* =========================
-           CARD DO FORMULÁRIO
-        ========================= */
-
-        .caixa-formulario {
-            background-color: white;
-
-            max-width: 800px;
-
-            margin: 0 auto;
-
-            padding: 30px;
-
-            border-radius: 12px;
-
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-        }
-
-        .titulo-formulario {
-            text-align: center;
-
-            margin-bottom: 25px;
-
-            color: #333;
-
-            font-weight: bold;
-        }
-
-        .form-label {
-            font-weight: 500;
-        }
-
-        .form-control {
-            border-radius: 7px;
-        }
-
-        .form-control:focus {
-            border-color: #dc3545;
-
-            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.15);
-        }
-
-
-        /* =========================
-           HORÁRIOS
-        ========================= */
-
-        .horarios {
-            display: flex;
-
-            gap: 10px;
-        }
-
-        .horarios .form-control {
-            width: 50%;
-        }
-
-
-        /* =========================
-           BOTÕES
-        ========================= */
-
-        .botoes-formulario {
-            display: flex;
-
-            justify-content: center;
-
-            gap: 10px;
-
-            margin-top: 25px;
-        }
-
-        .botoes-formulario .btn {
-            min-width: 120px;
-        }
-
-
-        /* =========================
-           CARD DA TABELA
-        ========================= */
-
-        .caixa-tabela {
-            background-color: white;
-
-            max-width: 1200px;
-
-            margin: 40px auto 0;
-
-            padding: 30px;
-
-            border-radius: 12px;
-
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-        }
-
-        .titulo-tabela {
-            text-align: center;
-
-            margin-bottom: 25px;
-
-            color: #333;
-
-            font-weight: bold;
-        }
-
-
-        /* =========================
-           TABELA
-        ========================= */
-
-        .tabela-horarios {
-            width: 100%;
-
-            margin-bottom: 0;
-
-            border-collapse: separate;
-            border-spacing: 0;
-
-            overflow: hidden;
-
-            border-radius: 8px;
-        }
-
-
-        /* Cabeçalho */
-
-        .tabela-horarios thead th {
-            background-color: #dc3545;
-
-            color: white;
-
-            padding: 14px;
-
-            border: none;
-
-            text-align: left;
-
-            white-space: nowrap;
-        }
-
-
-        /* Dados */
-
-        .tabela-horarios tbody td {
-            padding: 14px;
-
-            vertical-align: middle;
-
-            border-bottom: 1px solid #ddd;
-        }
-
-        .tabela-horarios tbody tr:last-child td {
-            border-bottom: none;
-        }
-
-        .tabela-horarios tbody tr:hover {
-            background-color: #f8f8f8;
-        }
-
-
-        /* =========================
-           COLUNA AÇÃO
-        ========================= */
-
-        .coluna-acao {
-            width: 110px;
-
-            text-align: center !important;
-
-            white-space: nowrap;
-        }
-
-        .acao {
-            display: inline-flex;
-
-            align-items: center;
-            justify-content: center;
-
-            margin: 0 5px;
-
-            text-decoration: none;
-        }
-
-        .icone-acao {
-            width: 22px !important;
-            height: 22px !important;
-
-            object-fit: contain;
-
-            margin: 0;
-
-            transition: transform 0.2s;
-        }
-
-        .icone-acao:hover {
-            transform: scale(1.15);
-        }
-
-
-        /* =========================
-           SEM HORÁRIOS
-        ========================= */
-
-        .sem-horarios {
-            text-align: center;
-
-            color: #777;
-
-            padding: 20px !important;
-        }
-
-
-        /* =========================
-           RODAPÉ
-        ========================= */
-
-        .rodape {
-            width: 100%;
-
-            background-color: #dc3545;
-
-            color: white;
-
-            padding: 40px 25px 20px;
-
-            margin-top: auto;
-        }
-
-        .rodape-container {
-            width: 100%;
-
-            max-width: 1200px;
-
-            margin: 0 auto;
-        }
-
-        .rodape h5 {
-            margin-bottom: 20px;
-
-            font-weight: bold;
-        }
-
-        .rodape p {
-            margin-bottom: 10px;
-        }
-
-        .rodape a {
-            color: white;
-
-            text-decoration: none;
-        }
-
-        .redes-sociais {
-            display: flex;
-
-            justify-content: flex-end;
-
-            gap: 20px;
-        }
-
-        .redes-sociais a {
-            font-size: 28px;
-
-            transition: transform 0.2s;
-        }
-
-        .redes-sociais a:hover {
-            transform: scale(1.15);
-        }
-
-        .direitos {
-            border-top: 1px solid rgba(255, 255, 255, 0.4);
-
-            margin-top: 25px;
-
-            padding-top: 15px;
-
-            text-align: center;
-        }
-
-
-        /* =========================
-           RESPONSIVIDADE
-        ========================= */
-
-        @media (max-width: 768px) {
-
-            header {
-                padding: 12px 15px;
-            }
-
-            .logo {
-                width: 75px;
-                height: 75px;
-            }
-
-            .btn-painel {
-                font-size: 14px;
-
-                padding: 8px 12px;
-            }
-
-            main {
-                padding: 30px 15px;
-            }
-
-            .caixa-formulario,
-            .caixa-tabela {
-                padding: 20px;
-            }
-
-            .horarios {
-                flex-direction: column;
-            }
-
-            .horarios .form-control {
-                width: 100%;
-            }
-
-            .rodape {
-                text-align: center;
-            }
-
-            .redes-sociais {
-                justify-content: center;
-            }
-
-        }
-    </style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#333;color:white;min-height:100vh;display:flex;flex-direction:column}
+header{background:#222;width:100%;padding:15px 25px;border-bottom:1px solid #444;box-shadow:0 4px 15px rgba(0,0,0,.25)}
+.header-content{width:100%;min-height:90px;display:flex;align-items:center;justify-content:center;position:relative}
+.logo{width:85px;height:85px;object-fit:cover;border-radius:50%;display:block;border:3px solid #ffc107}
+.logo-container,.header-content>a{position:absolute;left:0;display:flex;align-items:center}
+.tituloheader{color:white;font-size:30px;font-weight:bold;margin:0;text-align:center;white-space:nowrap}
+.tituloheader::after{content:"";display:block;width:55px;height:4px;background:#ffc107;border-radius:10px;margin:8px auto 0}
+.menu-header{display:none!important}
+main{flex:1;width:100%;padding:55px 20px 70px}
+.container{max-width:1200px}
+.caixa-formulario,.caixa-produtos{background:#222;color:white;width:100%;max-width:800px;margin:0 auto;padding:30px;border-radius:15px;border:1px solid #444;box-shadow:0 8px 20px rgba(0,0,0,.25)}
+.caixa-produtos{max-width:1200px}
+.titulo-formulario,.titulo-produtos{color:white;text-align:center;font-weight:bold;margin-bottom:35px;font-size:30px}
+.titulo-formulario::after,.titulo-produtos::after{content:"";display:block;width:65px;height:4px;background:#ffc107;border-radius:10px;margin:12px auto 0}
+.form-label{font-weight:500;color:#eee}
+.form-control,.form-select{border-radius:7px;background:#333;color:white;border:1px solid #555}
+.form-control::placeholder{color:#aaa}
+.form-control:focus,.form-select:focus{border-color:#ffc107;box-shadow:0 0 0 .2rem rgba(255,193,7,.15);background:#333;color:white}
+.form-select option{background:#222;color:white}
+.botoes-formulario{display:flex;justify-content:center;gap:10px;margin-top:25px}
+.botoes-formulario .btn{min-width:120px}
+.tabela-container{width:100%;overflow-x:auto}
+.tabela-produtos{width:100%;margin-bottom:0;border-collapse:separate;border-spacing:0;overflow:hidden;border-radius:8px;background:#222}
+.tabela-produtos thead th{background:#ffc107;color:#222;padding:14px;border:none;text-align:center;white-space:nowrap;font-weight:bold}
+.tabela-produtos tbody td{padding:14px;vertical-align:middle;border-bottom:1px solid #444;text-align:center;color:#ddd}
+.tabela-produtos tbody tr:last-child td{border-bottom:none}
+.tabela-produtos tbody tr:hover{background:#333}
+.coluna-acao{width:120px;text-align:center!important;white-space:nowrap}
+.acao{display:inline-flex;align-items:center;justify-content:center;margin:0 5px;text-decoration:none}
+.icone-acao{width:22px;height:22px;object-fit:contain;transition:.2s}
+.icone-acao:hover{transform:scale(1.15)}
+.mensagem-vazia,.sem-produtos{text-align:center;padding:30px;color:#aaa;font-size:17px}
+.rodape{width:100%;background:#222;color:white;padding:35px 25px 20px;margin-top:auto;border-top:1px solid #444}
+.rodape-container{width:100%;max-width:1200px;margin:0 auto}
+.direitos{border-top:1px solid rgba(255,193,7,.3);margin-top:10px;padding-top:18px;text-align:center;color:#999;font-size:14px}
+@media(max-width:768px){
+ header{padding:15px}.header-content{min-height:150px;flex-direction:column;gap:12px}
+ .header-content>a,.logo-container{position:static;margin:0}.logo{width:70px;height:70px}
+ .tituloheader{font-size:23px;order:2}.menu-header{display:none!important}
+ main{padding:40px 15px 55px}.titulo-formulario,.titulo-produtos{font-size:25px}
+ .caixa-formulario,.caixa-produtos{padding:20px}.tabela-produtos{min-width:650px}.rodape{text-align:center}
+}
+
+</style>
 
 </head>
 
@@ -457,152 +85,18 @@ include "../../conexao.php";
 
             <!-- LOGO -->
 
-            <a href="../menu.php">
+            <a href="javascript:history.back()">
 
                 <img src="../../imagens/logoota.jpeg" class="logo" alt="Logo OTA">
 
             </a>
 
+            <h1 class="tituloheader">Cadastro de Horário</h1>
+
 
             <!-- PAINEL ADMINISTRADOR -->
 
-            <div class="menu-header">
-
-                <div class="dropdown">
-
-                    <button class="btn btn-light dropdown-toggle btn-painel" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-
-                        Painel Administrador
-
-                    </button>
-
-
-                    <ul class="dropdown-menu dropdown-menu-end">
-
-                        <li>
-
-                            <a class="dropdown-item" href="../adm/FormAdm.php">
-
-                                Acesso Admin
-
-                            </a>
-
-                        </li>
-
-
-                        <li>
-
-                            <a class="dropdown-item" href="../produto/FormProd.php">
-
-                                Acesso Produtos
-
-                            </a>
-
-                        </li>
-
-
-                        <li>
-
-                            <a class="dropdown-item" href="../horario_funcionamento/FormHora.php">
-
-                                Acesso H. Funcionamento
-
-                            </a>
-
-                        </li>
-
-
-                        <li>
-
-                            <a class="dropdown-item" href="../avaliacao/VizuAva.php">
-
-                                Acesso Avaliação
-
-                            </a>
-
-                        </li>
-
-                    </ul>
-
-                </div>
-
-                <!-- PAINEL ADMINISTRADOR -->
-
-                <div class="menu-header">
-
-                    <div class="dropdown">
-
-                        <button class="btn btn-light dropdown-toggle btn-painel" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-
-                            Listagem dos Cadastros
-
-                        </button>
-
-
-                        <ul class="dropdown-menu dropdown-menu-end">
-
-                            <li>
-
-                                <a class="dropdown-item" href="../adm/VizuAdm.php">
-
-                                    Acesso Admin
-
-                                </a>
-
-                            </li>
-
-
-                            <li>
-
-                                <a class="dropdown-item" href="../produto/pastel.php">
-
-                                    Acesso Pastel
-
-                                </a>
-
-                            </li>
-
-                            <li>
-
-                                <a class="dropdown-item" href="../produto/bebidas.php">
-
-                                    Acesso Bebidas
-
-                                </a>
-
-                            </li>
-
-                            <li>
-
-                                <a class="dropdown-item" href="../produto/massas.php">
-
-                                    Acesso Massas
-
-                                </a>
-
-                            </li>
-
-
-                            <li>
-
-                                <a class="dropdown-item" href="VizuHora.php">
-
-                                    Acesso H. Funcionamento
-
-                                </a>
-
-                            </li>
-
-
-                        </ul>
-
-                    </div>
-
-                </div>
-
-            </div>
+            
 
     </header>
 

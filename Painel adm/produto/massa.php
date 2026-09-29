@@ -2,7 +2,7 @@
 include "../../conexao.php";
 
 // Busca os produtos cadastrados
-$sql = "SELECT * FROM produtos WHERE prod_idcategoria = 'bebida'";
+$sql = "SELECT * FROM produtos WHERE categoria = 'bebida'";
 $result = $conn->query($sql);
 ?>
 
@@ -24,358 +24,261 @@ $result = $conn->query($sql);
     <title>Visualização de Massas</title>
 
     <style>
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-
-            font-family: Arial, sans-serif;
-
-            background-color: #f2f2f2;
-
-            min-height: 100vh;
-
-            display: flex;
-
-            flex-direction: column;
-        }
-
-
-        /* =========================
-           CABEÇALHO
-        ========================= */
-
-        header {
-            background-color: #dc3545;
-
-            width: 100%;
-
-            padding: 15px 25px;
-        }
-
-
-        .header-content {
-            width: 100%;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            gap: 15px;
-        }
-
-
-        /* LOGO */
-
-        .logo {
-            width: 100px;
-
-            height: 100px;
-
-            object-fit: cover;
-
-            border-radius: 50%;
-
-            display: block;
-        }
-
-
-        /* MENU */
-
-        .menu-header {
-            margin-left: auto;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: flex-end;
-
-            gap: 10px;
-
-            flex-wrap: wrap;
-        }
-
-
-        .btn-painel {
-            font-size: 16px;
-
-            padding: 10px 18px;
-
-            border-radius: 6px;
-        }
-
-
-        .dropdown-menu {
-            margin-top: 8px !important;
-        }
-
-
-        /* =========================
-           CONTEÚDO
-        ========================= */
-
-        main {
-            flex: 1;
-
-            width: 100%;
-
-            padding: 40px 20px 50px;
-        }
-
-
-        /* =========================
-           CARD DOS PRODUTOS
-        ========================= */
-
-        .caixa-produtos {
-            background-color: white;
-
-            max-width: 1200px;
-
-            margin: 0 auto;
-
-            padding: 30px;
-
-            border-radius: 12px;
-
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-        }
-
-
-        .titulo-produtos {
-            text-align: center;
-
-            margin-bottom: 30px;
-
-            color: #333;
-
-            font-weight: bold;
-        }
-
-
-        /* =========================
-           TABELA
-        ========================= */
-
-        .tabela-container {
-            width: 100%;
-
-            overflow-x: auto;
-        }
-
-
-        .tabela-produtos {
-            width: 100%;
-
-            margin-bottom: 0;
-
-            border-collapse: separate;
-
-            border-spacing: 0;
-
-            border-radius: 8px;
-
-            overflow: hidden;
-        }
-
-
-        /* CABEÇALHO */
-
-        .tabela-produtos thead th {
-            background-color: #dc3545;
-
-            color: white;
-
-            padding: 14px;
-
-            border: none;
-
-            text-align: center;
-
-            white-space: nowrap;
-        }
-
-
-        /* DADOS */
-
-        .tabela-produtos tbody td {
-            padding: 14px;
-
-            vertical-align: middle;
-
-            border-bottom: 1px solid #ddd;
-
-            text-align: center;
-        }
-
-
-        .tabela-produtos tbody tr:last-child td {
-            border-bottom: none;
-        }
-
-
-        .tabela-produtos tbody tr:hover {
-            background-color: #f8f8f8;
-        }
-
-
-        /* =========================
-           COLUNA AÇÕES
-        ========================= */
-
-        .coluna-acao {
-            width: 150px;
-
-            text-align: center !important;
-
-            white-space: nowrap;
-        }
-
-
-        .acao {
-            display: inline-flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            margin: 0 5px;
-
-            text-decoration: none;
-        }
-
-
-        .icone-acao {
-            width: 22px;
-
-            height: 22px;
-
-            object-fit: contain;
-
-            transition: transform 0.2s;
-        }
-
-
-        .icone-acao:hover {
-            transform: scale(1.15);
-        }
-
-
-        /* =========================
-           MENSAGEM
-        ========================= */
-
-        .mensagem-vazia {
-            text-align: center;
-
-            padding: 30px;
-
-            color: #666;
-
-            font-size: 17px;
-        }
-
-
-        /* =========================
-           RODAPÉ
-        ========================= */
-
-        .rodape {
-            width: 100%;
-
-            background-color: #dc3545;
-
-            color: white;
-
-            padding: 40px 25px 20px;
-
-            margin-top: auto;
-        }
-
-
-        .rodape-container {
-            width: 100%;
-
-            max-width: 1200px;
-
-            margin: 0 auto;
-        }
-
-
-        .direitos {
-            border-top: 1px solid rgba(255, 255, 255, 0.4);
-
-            margin-top: 25px;
-
-            padding-top: 15px;
-
-            text-align: center;
-        }
-
-
-        /* =========================
-           RESPONSIVIDADE
-        ========================= */
-
-        @media (max-width: 768px) {
-
-            header {
-                padding: 12px 15px;
-            }
-
-
-            .header-content {
-                flex-direction: column;
-            }
-
-
-            .logo {
-                width: 75px;
-
-                height: 75px;
-            }
-
-
-            .menu-header {
-                margin-left: 0;
-
-                justify-content: center;
-            }
-
-
-            .btn-painel {
-                font-size: 14px;
-
-                padding: 8px 12px;
-            }
-
-
-            main {
-                padding: 30px 15px;
-            }
-
-
-            .caixa-produtos {
-                padding: 20px;
-            }
-
-
-            .tabela-produtos {
-                min-width: 650px;
-            }
-
-
-            .rodape {
-                text-align: center;
-            }
-
-        }
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #333;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header, .rodape {
+    background: #222;
+    border-color: #444;
+}
+
+header {
+    padding: 15px 25px;
+    border-bottom: 1px solid #444;
+}
+
+.header-content {
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.logo {
+    width: 85px;
+    height: 85px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #ffc107;
+}
+
+.header-content > a {
+    position: absolute;
+    left: 0;
+}
+
+.tituloheader {
+    margin: 0;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.tituloheader::after,
+.titulo-produtos::after,
+.titulo-formulario::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 4px;
+    margin: 10px auto 0;
+    background: #ffc107;
+    border-radius: 10px;
+}
+
+.menu-header {
+    position: absolute;
+    right: 0;
+    display: flex;
+    gap: 10px;
+}
+
+.btn-painel {
+    background: #ffc107 !important;
+    color: #222 !important;
+    border: 0 !important;
+    font-weight: bold !important;
+    border-radius: 8px !important;
+}
+
+.btn-painel:hover { background: #e0a800 !important; }
+
+.dropdown-menu {
+    background: #222;
+    border: 1px solid #444;
+}
+
+.dropdown-item { color: white; }
+.dropdown-item:hover { background: #dc3545; color: white; }
+
+main {
+    flex: 1;
+    padding: 50px 20px 70px;
+}
+
+.titulo-produtos,
+.titulo-formulario {
+    margin-bottom: 30px;
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.caixa-produtos,
+.caixa-formulario {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 30px;
+    background: #222;
+    border: 1px solid #444;
+    border-radius: 15px;
+}
+
+.caixa-formulario { max-width: 800px; }
+
+.tabela-container { overflow-x: auto; }
+
+.tabela-produtos {
+    width: 100%;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.tabela-produtos th {
+    padding: 14px;
+    background: #ffc107;
+    color: #000;
+    text-align: center;
+    border: 0;
+}
+
+.tabela-produtos td {
+    padding: 14px;
+    background: white;
+    color: #000;
+    text-align: center;
+    vertical-align: middle;
+    border-bottom: 1px solid #ddd;
+}
+
+.tabela-produtos tr:last-child td { border-bottom: 0; }
+.tabela-produtos tbody tr:hover td { background: #f2f2f2; }
+
+.coluna-acao {
+    width: 120px;
+    white-space: nowrap;
+}
+
+.acao {
+    display: inline-flex;
+    margin: 0 5px;
+}
+
+.icone-acao {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+}
+
+.icone-acao:hover { transform: scale(1.1); }
+
+.mensagem-vazia,
+.sem-produtos {
+    padding: 30px;
+    color: #000;
+    text-align: center;
+}
+
+.form-label { color: white; font-weight: bold; }
+
+.form-control,
+.form-select {
+    background: #333;
+    color: white;
+    border: 1px solid #555;
+    border-radius: 7px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background: #333;
+    color: white;
+    border-color: #ffc107;
+    box-shadow: 0 0 0 .2rem rgba(255,193,7,.15);
+}
+
+.form-select option { background: #222; color: white; }
+
+.botoes-formulario {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.rodape {
+    padding: 30px 25px 20px;
+    border-top: 1px solid #444;
+    margin-top: auto;
+}
+
+.rodape-container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.rodape h5 { margin-bottom: 20px; }
+.rodape p { margin-bottom: 10px; }
+.rodape a { color: white; text-decoration: none; }
+
+.direitos {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255,193,7,.3);
+    color: #999;
+    text-align: center;
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+    header { padding: 15px; }
+
+    .header-content {
+        min-height: 150px;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .header-content > a,
+    .menu-header {
+        position: static;
+    }
+
+    .logo { width: 70px; height: 70px; }
+    .tituloheader { font-size: 23px; }
+    .menu-header { justify-content: center; }
+
+    main { padding: 40px 15px 55px; }
+
+    .titulo-produtos,
+    .titulo-formulario { font-size: 25px; }
+
+    .caixa-produtos,
+    .caixa-formulario { padding: 20px; }
+
+    .tabela-produtos { min-width: 650px; }
+    .rodape { text-align: center; }
+}
+
+@media (max-width: 480px) {
+    .tituloheader { font-size: 21px; }
+    .titulo-produtos,
+    .titulo-formulario { font-size: 23px; }
+}
 
     </style>
 
@@ -405,85 +308,14 @@ $result = $conn->query($sql);
 
             </a>
 
+            <h1 class="tituloheader">
+                Massas
+            </h1>
+
 
             <!-- MENUS -->
 
             <div class="menu-header">
-
-
-                <!-- PAINEL ADMINISTRADOR -->
-
-                <div class="dropdown">
-
-                    <button
-                        class="btn btn-light dropdown-toggle btn-painel"
-                        type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false">
-
-                        Painel Administrador
-
-                    </button>
-
-
-                    <ul class="dropdown-menu dropdown-menu-end">
-
-
-                        <li>
-
-                            <a
-                                class="dropdown-item"
-                                href="../adm/FormAdm.php">
-
-                                Acesso Admin
-
-                            </a>
-
-                        </li>
-
-
-                        <li>
-
-                            <a
-                                class="dropdown-item"
-                                href="../produto/FormProd.php">
-
-                                Acesso Produtos
-
-                            </a>
-
-                        </li>
-
-
-                        <li>
-
-                            <a
-                                class="dropdown-item"
-                                href="../horario_funcionamento/FormHora.php">
-
-                                Acesso H. Funcionamento
-
-                            </a>
-
-                        </li>
-
-
-                        <li>
-
-                            <a
-                                class="dropdown-item"
-                                href="../avaliacao/VizuAva.php">
-
-                                Acesso Avaliação
-
-                            </a>
-
-                        </li>
-
-
-                    </ul>
-
-                </div>
 
 
                 <!-- LISTA DE PRODUTOS -->
@@ -548,57 +380,7 @@ $result = $conn->query($sql);
                 </div>
 
 
-                <!-- LISTAGEM DOS CADASTROS -->
-
-                <div class="dropdown">
-
-                    <button
-                        class="btn btn-light dropdown-toggle btn-painel"
-                        type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false">
-
-                        Listagem dos Cadastros
-
-                    </button>
-
-
-                    <ul class="dropdown-menu dropdown-menu-end">
-
-
-                        <li>
-
-                            <a
-                                class="dropdown-item"
-                                href="../adm/VizuAdm.php">
-
-                                Acesso Admin
-
-                            </a>
-
-                        </li>
-
-
-                        <li>
-
-                            <a
-                                class="dropdown-item"
-                                href="../horario_funcionamento/VizuHora.php">
-
-                                Acesso H. Funcionamento
-
-                            </a>
-
-                        </li>
-
-
-                    </ul>
-
-                </div>
-
-
-            </div>
-
+                
         </div>
 
     </header>
