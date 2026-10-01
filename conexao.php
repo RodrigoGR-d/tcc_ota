@@ -1,6 +1,6 @@
 <?php
 
-/*Abaixo é informado o acesso ao banco de dados, caminho do servidor, 
+/*Abaixo é informado o acesso ao banco de dados, caminho do , 
 usuario do banco (root), senha (vazia), nome do banco criado */
 
 $servername = "localhost";
