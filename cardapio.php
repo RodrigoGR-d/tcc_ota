@@ -826,7 +826,7 @@ include("conexao.php");
         </a>
 
 
-        <a href="contato.php">
+        <a href="Usuário Final/fale_conosco/contato.php">
 
             <i class="bi bi-telephone"></i>
 

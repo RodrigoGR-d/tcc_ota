@@ -449,7 +449,7 @@ include "../../conexao.php";
                     Cardápio
                 </a>
 
-                <a href="sobre.php">
+                <a href="../../sobre.php">
                     <i class="bi bi-people"></i>
                     Sobre
                 </a>
