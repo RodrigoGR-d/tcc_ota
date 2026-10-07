@@ -846,6 +846,24 @@
 
                 </div>
 
+                <div class="col-10 col-sm-4 col-lg-4 text-align-center">
+
+<a
+    href="login_adm.php"
+    class="card-acesso">
+
+    <i class="bi bi-star"></i>
+
+    <p>
+
+        Sair
+
+    </p>
+
+</a>
+
+</div>
+
 
             </div>
 
