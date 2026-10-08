@@ -142,6 +142,19 @@ administrador e retorna se este usuário existe*/
         color: white;
     }
 
+    .btn-voltar {
+        color: #333;
+        border: 2px solid #333;
+        font-weight: 600;
+        border-radius: 8px;
+        padding: 10px;
+    }
+
+    .btn-voltar:hover {
+        background-color: #333;
+        color: white;
+    }
+
     .btn-cadastro {
         background-color: #ffc107;
         border: none;
@@ -281,6 +294,11 @@ administrador e retorna se este usuário existe*/
                     <i class="bi bi-box-arrow-in-right"></i>
                     Entrar
                 </button>
+
+                <a href="../index.php" class="btn btn-voltar w-100 mt-3">
+                <i class="bi bi-arrow-left"></i>
+                    Voltar
+                </a>
 
             </form>
 
