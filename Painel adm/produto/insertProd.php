@@ -14,7 +14,7 @@ $prod_categoria = $_POST['categoria'];
 // Upload da imagem
 $prod_foto = "";
 if(isset($_FILES['prod_foto']) && $_FILES['prod_foto']['error'] == 0){
-    $pasta = "../uploads/";
+    $pasta = "../../../uploads/";
     if(!is_dir($pasta)){
         mkdir($pasta, 0777, true);
     }
