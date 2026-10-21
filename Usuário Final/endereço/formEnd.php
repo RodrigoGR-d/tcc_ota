@@ -1,5 +1,5 @@
 <?php
-/*Aqui virá o código de busca ultilizando o comando SQL*/
+include "../../protege.php"
 include "../../conexao.php"
 ?>
 
