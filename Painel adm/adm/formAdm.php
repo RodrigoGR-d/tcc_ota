@@ -1,5 +1,5 @@
 <?php
-include "../../protege.php"
+
 include "../../conexao.php";
 ?>
 

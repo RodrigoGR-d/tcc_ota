@@ -1,5 +1,5 @@
 <?php
-
+include "../../protege.php";
 include "../../conexao.php";
 
 $sql = "SELECT * FROM adm ORDER BY nome_adm ASC";

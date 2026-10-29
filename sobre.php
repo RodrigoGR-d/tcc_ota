@@ -43,24 +43,36 @@
         }
 
 
-        /* =========================
+         /* =========================
            CABEÇALHO
         ========================= */
 
         header {
-            background-color: #333;
+            background-color: #dc3545;
+
             width: 100%;
+
             padding: 15px 25px;
+
+            position: relative;
+
+            background-color: #333;
         }
 
 
         .header-content {
             width: 100%;
+
             min-height: 70px;
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
             position: relative;
+
         }
 
 
@@ -70,47 +82,96 @@
 
         .logo-container {
             position: absolute;
+
             left: 0;
+
             top: 50%;
+
             transform: translateY(-50%);
         }
 
 
         .logoota {
             width: 70px;
+
             height: 70px;
+
             object-fit: cover;
+
             border-radius: 50%;
+
             display: block;
         }
 
 
         /* =========================
-           MENU
+           MENU DE NAVEGAÇÃO
         ========================= */
 
         .menu-navegacao {
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
             gap: 10px;
         }
 
 
         .menu-navegacao a {
             position: relative;
+
             color: #ffc107;
+
             text-decoration: none;
+
             font-size: 17px;
+
             font-weight: bold;
+
             padding: 10px 16px;
+
             border-radius: 8px;
+
+            transition: all 0.3s ease;
+        }
+
+
+        .menu-navegacao a::after {
+            content: "";
+
+            position: absolute;
+
+            width: 0;
+
+            height: 3px;
+
+            background-color: #ffc107;
+
+            left: 50%;
+
+            bottom: 4px;
+
+            transform: translateX(-50%);
+
+            border-radius: 10px;
+
+            transition: width 0.3s ease;
         }
 
 
         .menu-navegacao a:hover {
             color: #fff;
+
             background-color: rgba(255, 193, 7, 0.12);
+
+            transform: translateY(-3px);
+        }
+
+
+        .menu-navegacao a:hover::after {
+            width: 65%;
         }
 
 
@@ -120,42 +181,73 @@
 
         .header-direita {
             position: absolute;
+
             right: 0;
+
             display: flex;
+
             align-items: center;
+
             gap: 25px;
         }
 
 
         .conta-link {
-            color: black;
+            color: #ffc107;
+
             text-decoration: none;
+
             display: flex;
+
             align-items: center;
+
             gap: 8px;
+
+            transition: all 0.3s ease;
+        }
+
+
+        .conta-link:hover {
+            transform: translateY(-2px);
+
+            opacity: 0.75;
         }
 
 
         .conta {
             margin: 0;
+
             font-weight: bold;
-            color: black;
+
+            color: white;
         }
 
 
         .user {
             font-size: 28px;
-            color: black;
+
+            color: white;
         }
 
 
         .carrinho {
             font-size: 30px;
-            color: black;
+
+            color: white;
+
             cursor: pointer;
+
+            transition: all 0.3s ease;
         }
 
 
+        .carrinho:hover {
+            transform: scale(1.15);
+
+            color: #ffc107;
+        }
+
+        
         /* =========================
            CONTEÚDO SOBRE
         ========================= */
@@ -579,13 +671,20 @@
                     CONTA
 
                 </span>
-
                 <i class="bi bi-person-circle user"></i>
 
+                
+
             </a>
+            <a
+                href="Usuário Final/carrinho/carrinho.php"
+                class="conta-link">
 
+                <i class="bi bi-cart4 carrinho"></i>
 
-            <i class="bi bi-cart4 carrinho"></i>
+    </a>
+
+            
 
         </div>
 

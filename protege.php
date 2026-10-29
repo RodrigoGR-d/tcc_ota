@@ -1,7 +1,8 @@
 <?php
 session_start();
-if (!isset($_session['admin'])){
-    header("location: Usuário Final/login_user.php");
+
+if (!isset($_SESSION['admin'])) {
+    header("Location: /tcc_ota/Painel%20adm/login_adm.php");
     exit;
 }
 ?>

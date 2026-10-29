@@ -1,184 +1,32 @@
 <?php
-/*Aqui virá o código de busca ultilizando o comando SQL*/
-include "../../conexao.php"
+include "../../conexao.php";
+function h($valor) { return htmlspecialchars((string)($valor ?? ''), ENT_QUOTES, 'UTF-8'); }
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedidos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" 
-    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadastrar pedido - Pastelaria OTA</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
-    body{
-        font-family:Arial;
-        text-align:center;
-        background-color:#f2f2f2;
-    }
-    .container{
-        background:white;
-        width:600px;
-        margin:auto;
-        margin-top:30px;
-        padding:20px;
-        border-radius:10px;
-    }
-    .caixa{
-        width:80%;
-        padding:5px;
-        margin:5px;
-    }
-    img{
-        width:100px;
-        margin-bottom:10px;
-    }
-    .grupo{
-        text-align:left;
-        width:80%;
-        margin:auto;
-    }
-    .grupo label{
-        display:block;
-        margin:5px 0;
-    }
-    .ota{
-        color: white;
-        font-weight: bold;
-    }
-    header{
-        background-color: red;
-        padding: 22px;
-        text-align: center;
-    }
-    .logoota{
-        height: 125px;
-        border-radius: 80%;
-        overflow: hidden;
-        
-    }
-</style>
-
-</head>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#333;color:#fff;min-height:100vh;display:flex;flex-direction:column}
+header{background:#222;padding:15px 25px;border-bottom:1px solid #444}.header-content{min-height:90px;display:flex;align-items:center;justify-content:center;position:relative}.logo{position:absolute;left:0;width:85px;height:85px;object-fit:cover;border-radius:50%;border:3px solid #ffc107}.tituloheader{font-size:30px;font-weight:bold;margin:0;text-align:center}.tituloheader:after,.titulo-formulario:after{content:"";display:block;width:60px;height:4px;background:#ffc107;border-radius:10px;margin:10px auto 0}
+main{flex:1;padding:55px 20px 70px}.caixa-formulario{width:100%;max-width:800px;margin:0 auto;padding:30px;background:#222;border:1px solid #444;border-radius:15px;box-shadow:0 8px 20px rgba(0,0,0,.25)}.titulo-formulario{text-align:center;font-size:30px;font-weight:bold;margin-bottom:30px}.form-label{color:#eee}.form-control{background:#333;color:#fff;border:1px solid #555;border-radius:7px}.form-control:focus{background:#333;color:#fff;border-color:#ffc107;box-shadow:0 0 0 .2rem rgba(255,193,7,.15)}.botoes{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:25px}.btn-ota{background:#ffc107;color:#222;font-weight:bold;border:0}.btn-ota:hover{background:#e0a800;color:#222}.rodape{margin-top:auto;padding:25px;background:#222;border-top:1px solid #444;text-align:center;color:#999;font-size:14px}
+@media(max-width:768px){.header-content{min-height:150px;flex-direction:column;gap:12px}.logo{position:static;width:70px;height:70px}.tituloheader{font-size:23px}main{padding:30px 15px}.caixa-formulario{padding:20px}.titulo-formulario{font-size:25px}}
+</style></head>
 <body>
-
-<header>
-        <div class="container-fluid">
-            <div class="row">
-            <div class="col-1">
-            <a href="../../menu.php">
-        <img class="logoota" src="../imagens/logoota.jpeg">
-        </a> 
-        </div>
-        <div class="col-11 d-flex justify-content-center align-items-center">
-            
-            <div class="tituloheader">
-        
-            <h1><span class="ota">OTA</span> <span class="pastelescrita">Pásteis</span></h1>
-
-            </div>
-        </div>
-
-       
-        </div>
-        </div>
-    </header>
-
-    <a href="../menu.php">
-    <img src="">
-    </a>
-
-    <div class="container col-6 mb-4">    
-    <h2>Pedidos</h2>
-    <form method="post" action="insertPedi.php" enctype="multipart/form-data">
-    <div class="col-12 m-6">
-        
-    
-        <div class="col-lg-12 col-md-6 col-sm-12 mb-4 mt-4">
-            <label for="cpf_adm" class="form-label" >CPF</label><br>
-            <input type="text" name="cpf_adm"  class="form-control" placeholder="Insira seu CPF">
-            
-        </div>
-
-        <div class="col-lg-12 col-md-6 col-sm-12 mb-4 mt-4">
-           <label for="nome_adm" class="form-label">Nome:</label><br>
-            <input type="text" name="nome_adm" class="form-control"  placeholder="Insira seu Nome"><br>
-        </div>
-
-        <div class="col-lg-12 col-md-6 col-sm-12 mb-4 mt-4">
-        <label for="email_adm" class="form-label">Email:</label><br>
-            <input type="email" name="email_adm" class="form-control"  placeholder="Insira seu email"><br>
-        </div>
-
-        <div class="col-lg-12 col-md-6 col-sm-12 mb-4 mt-4">
-            <label for="senha_adm" class="form-label">Senha:</label><br>
-            <input type="password" name="senha_adm" class="form-control" placeholder="Insira sua Senha"><br>
-        </div>
-<br>
-
-<!--Botõs de Enviar e Limpar-->
-    <input type="submit" value="CADASTRAR" class="btn btn-success">
-    <input type="reset" value="CANCELAR"  class="btn btn-danger">
-
-</form>
+<header><div class="header-content"><a href="javascript:history.back()"><img src="../../imagens/logoota.jpeg" class="logo" alt="Logo OTA"></a><h1 class="tituloheader">Cadastro de Pedido</h1></div></header>
+<main><section class="caixa-formulario">
+<h2 class="titulo-formulario">Cadastrar pedido</h2>
+<form method="post" action="insertPedi.php">
+<div class="mb-3"><label for="id_pedido" class="form-label">ID do pedido</label><input type="number" min="1" name="id_pedido" id="id_pedido" class="form-control" placeholder="Informe o ID do pedido" required></div>
+<div class="row">
+<div class="col-md-6 mb-3"><label for="data_pedido" class="form-label">Data do pedido</label><input type="date" name="data_pedido" id="data_pedido" class="form-control" required></div>
+<div class="col-md-6 mb-3"><label for="horario_pedido" class="form-label">Horário do pedido</label><input type="time" name="horario_pedido" id="horario_pedido" class="form-control" required></div>
 </div>
-</div>
-<!--Início da tabela de visualização de usuário-->
-
-<table>
-    <thead>
-        <tr>
-            <th>Avaliação</th>
-        </tr>
-    </thead>
-
-<!-- A partir da segunda linha da tabela os dados serão em PHP e virão do banco de dados -->
-
-    <tbody>
-        <?php
-        /*Verifica se há registros retornados utilizando 
-        o comando em select da tabela tbl_aluno*/
-
-        $sql = "SELECT * FROM avaliacao";
-        $result = $conn->query($sql);
-
-            while ($row = $result->fetch_assoc()){
-/*Na linha abaixo ele solicita que o campo chave primária seja 
-adicionada dentro de uma variável PHP para utilizar como condição*/
-
-                $id_ava = $row['id_ava'];
-                
-    /*Dentro dos colchetes na sequência abaixo virá o nome do 
-    campo da tabela que exibirá os dados do banco. */
-                echo "<tr>
-
-                <td>{$row['avaliacao']}</td>
-                
-            <td>
-            <a href='editarformAva.php?id_ava=$id_ava'>
-            <img src='../../imagens/lapis.png' width='20' height='20'>
-            </a>
-
-            <a href='deleteAva.php?id_ava=$id_ava'
-            onclick=\"return confirm('Deseja realmente excluir a Avaliação
-            {$row['avaliacao']}?');\">
-            <img src='../../imagens/lixeira.png'            
-            width='20' height='20'> 
-            </a>
-
-            </td>
-             </tr>";
-
-            }
-            
-        ?>
-    </tbody>
-
-</table>
-
-
-</div>
-
-</body>
-</html>
+<div class="mb-3"><label for="total_ped" class="form-label">Valor total (R$)</label><input type="number" min="0" step="0.01" name="total_ped" id="total_ped" class="form-control" placeholder="Ex.: 35.90" required></div>
+<div class="botoes"><button type="submit" class="btn btn-ota px-4">Cadastrar</button><button type="reset" class="btn btn-outline-light px-4">Limpar</button><a href="VizuPed.php" class="btn btn-secondary px-4">Ver pedidos</a></div>
+</form></section></main>
+<footer class="rodape">© 2026 Pastelaria OTA - Todos os direitos reservados.</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body></html>

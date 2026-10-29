@@ -20,7 +20,7 @@ include "../../conexao.php";
 
     <!-- Bootstrap Icons -->
     <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
     <style>
 
@@ -51,6 +51,7 @@ include "../../conexao.php";
             background-color: #333;
             width: 100%;
             padding: 15px 25px;
+            position: relative;
         }
 
         .header-content {
@@ -179,58 +180,80 @@ include "../../conexao.php";
            FORMULÁRIO
         ========================= */
 
+        /* ÁREA PRINCIPAL NO MESMO TEMA ESCURO E AMARELO DO INDEX */
         .area-formulario {
             width: 90%;
-            max-width: 800px;
-            margin: 50px auto;
+            max-width: 900px;
+            margin: 55px auto;
             flex: 1;
         }
 
         .card-formulario {
-            background-color: white;
-            padding: 35px;
-            border-radius: 12px;
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+            background: #333;
+            color: #fff;
+            padding: 40px;
+            border-radius: 14px;
+            border-top: 5px solid #ffc107;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
         }
 
         .titulo-formulario {
-            color: #dc3545;
+            color: #ffc107;
             font-weight: bold;
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .subtitulo-formulario {
             text-align: center;
-            color: #666;
-            margin-bottom: 30px;
+            color: #e0e0e0;
+            margin-bottom: 32px;
         }
 
         .form-label {
             font-weight: bold;
-            color: #333;
+            color: #ffc107;
         }
 
         .form-control {
+            border: 1px solid #d5d5d5;
             border-radius: 7px;
-            padding: 10px 12px;
+            padding: 11px 13px;
+            background-color: #f8f8f8;
         }
 
         .form-control:focus {
-            border-color: #dc3545;
-            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.15);
+            border-color: #ffc107;
+            box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.2);
         }
 
         textarea.form-control {
-            min-height: 130px;
+            min-height: 150px;
             resize: vertical;
         }
 
         .botoes-formulario {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-top: 25px;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .botoes-formulario .btn-success {
+            background-color: #ffc107;
+            border-color: #ffc107;
+            color: #222;
+            font-weight: bold;
+        }
+
+        .botoes-formulario .btn-success:hover {
+            background-color: #e0a800;
+            border-color: #e0a800;
+            color: #222;
+        }
+
+        .botoes-formulario .btn-danger {
+            font-weight: bold;
         }
 
         /* =========================
@@ -316,6 +339,14 @@ include "../../conexao.php";
         ========================= */
 
         @media (max-width: 991px) {
+
+            .card-formulario {
+                padding: 28px 22px;
+            }
+
+            .area-formulario {
+                margin: 35px auto;
+            }
 
             header {
                 padding: 15px 20px;
@@ -467,7 +498,7 @@ include "../../conexao.php";
             <div class="header-direita">
 
                 <a
-                    href="Usuário Final/login_user.php"
+                    href="../login_user.php"
                     class="conta-link">
 
                     <span class="conta">
@@ -478,7 +509,13 @@ include "../../conexao.php";
 
                 </a>
 
-                <i class="bi bi-cart4 carrinho"></i>
+                <a
+                href="../carrinho/carrinho.php"
+                class="conta-link">
+
+            <i class="bi bi-cart4 carrinho"></i>
+
+    </a>
 
             </div>
 
@@ -670,16 +707,16 @@ include "../../conexao.php";
 
                     <p>
                         <i class="bi bi-telephone"></i>
-                        (12) 99999-9999
+                        (12) 99241-5366
                     </p>
 
                     <p>
                         <i class="bi bi-geo-alt"></i>
-                        Rua Neymar, Centro
+                        Avenida João Paulo II - 420
                     </p>
 
                     <p>
-                        São Paulo - SP
+                        Aparecida - SP
                     </p>
 
                 </div>
@@ -708,7 +745,7 @@ include "../../conexao.php";
                     <p>
 
                         <a
-                            href="sobre.php"
+                            href="../../sobre.php"
                             class="link-sobre-footer">
 
                             Sobre Nós

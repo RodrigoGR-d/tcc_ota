@@ -1028,8 +1028,13 @@ include "conexao.php";
 
             </a>
 
+            <a
+                href="Usuário Final/carrinho/carrinho.php"
+                class="conta-link">
 
             <i class="bi bi-cart4 carrinho"></i>
+
+    </a>
 
         </div>
 

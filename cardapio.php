@@ -463,8 +463,13 @@ include("conexao.php");
                     <span class="conta">CONTA</span>
                     <i class="bi bi-person-circle user"></i>
                 </a>
+                <a
+                href="Usuário Final/carrinho/carrinho.php"
+                class="conta-link">
 
-                <i class="bi bi-cart4 carrinho"></i>
+            <i class="bi bi-cart4 carrinho"></i>
+
+    </a>
             </div>
 
         </div>

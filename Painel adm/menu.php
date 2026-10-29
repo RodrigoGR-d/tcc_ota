@@ -1,3 +1,8 @@
+
+<?php
+include "../protege.php";
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -849,7 +854,7 @@
                 <div class="col-10 col-sm-4 col-lg-4 text-align-center">
 
 <a
-    href="login_adm.php"
+    href="../logout.php"
     class="card-acesso">
 
     <i class="bi bi-star"></i>

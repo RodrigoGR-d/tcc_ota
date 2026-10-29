@@ -1,4 +1,5 @@
 <?php
+include "../../protege.php";
 include "../../conexao.php";
 
 $sql = "SELECT * FROM avaliacao";

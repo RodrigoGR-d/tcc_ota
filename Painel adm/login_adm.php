@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($senha_adm === $usuario['senha_adm']) {
 
             $_SESSION['admin'] = $usuario['nome_adm'];
-            $_SESSION['admin_id'] = $usuario['id_adm'];
+            $_SESSION['admin_id'] = $usuario['cpf_adm'];
 
             header("Location: menu.php");
             exit;
