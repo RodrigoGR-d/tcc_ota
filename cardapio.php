@@ -2,6 +2,13 @@
 include("conexao.php");
 ?>
 
+<?php
+if (session_status() !== PHP_SESSION_ACTIVE) { session_start(); }
+include("conexao.php");
+$carrinhoQtd = 0; foreach (($_SESSION["ota_carrinho"] ?? []) as $q) { $carrinhoQtd += (int)$q; }
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -467,7 +474,7 @@ include("conexao.php");
                 href="Usuário Final/carrinho/carrinho.php"
                 class="conta-link">
 
-            <i class="bi bi-cart4 carrinho"></i>
+                <i class="bi bi-cart4 carrinho"></i> <?php if ($carrinhoQtd > 0) echo '<span class="badge bg-danger">'.(int)$carrinhoQtd.'</span>'; ?>
 
     </a>
             </div>
@@ -483,6 +490,7 @@ include("conexao.php");
     </div>
 
     <!-- CARDÁPIO -->
+
 
     <main class="area-cardapio">
 
@@ -568,15 +576,13 @@ include("conexao.php");
                                 ?>
                             </div>
 
-                            <button
-                                type="button"
-                                class="btn-carrinho"
-                                onclick="adicionarCarrinho()">
-
-                                <i class="bi bi-cart-plus"></i>
-                                Adicionar ao carrinho
-
-                            </button>
+                            <form action="Usuário Final/carrinho/adicionar.php" method="post">
+                                <input type="hidden" name="id_prod" value="<?php echo (int)$produto['id_prod']; ?>">
+                                <input type="hidden" name="quantidade" value="1">
+                                <button type="submit" class="btn-carrinho">
+                                    <i class="bi bi-cart-plus"></i> Adicionar ao carrinho
+                                </button>
+                            </form>
 
                         </div>
                     </div>

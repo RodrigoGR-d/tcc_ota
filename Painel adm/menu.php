@@ -722,9 +722,9 @@ include "../protege.php";
                                 class="dropdown-item"
                                 href="horario_funcionamento/VizuHora.php">
 
-                                <i class="bi bi-clock"></i>
+                                <i class="bi bi-receipt"></i>
 
-                                Acesso H. Funcionamento
+                                Acesso Pedidos
 
                             </a>
 
@@ -809,19 +809,19 @@ include "../protege.php";
 
 
 
-                <!-- HORÁRIOS -->
+                <!-- PEDIDOS -->
 
                 <div class="col-6 col-sm-6 col-lg-6">
 
                     <a
-                        href="horario_funcionamento/vizuHora.php"
+                        href="pedido/VizuPed.php"
                         class="card-acesso">
 
-                        <i class="bi bi-clock"></i>
+                        <i class="bi bi-receipt"></i>
 
                         <p>
 
-                            Horários 
+                            Pedidos
 
                         </p>
 
