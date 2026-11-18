@@ -1,6 +1,6 @@
 <?php
 include "../conexao.php";
-include "../validacoesUser.php";
+include "validacoesUser.php";
 
 $erro = "";
 $sucesso = "";
@@ -226,7 +226,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
         <form onsubmit="if (typeof validaruser != 'function') 
-        { alert('O arquivo validacoesuser.js não carregou. Verifique se ele está na mesma pasta do formulário.'); return false; } return validarUser();" method="POST" action="">
+        { alert('O arquivo validacoesUser.js não carregou. Verifique se ele está na mesma pasta do formulário.'); return false; } return validarUser();" method="POST" action="">
 
 
             <!-- Nome -->
@@ -255,22 +255,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     CPF
                 </label>
 
-                <input
-                    type="text"
-                    name="cpf_cli"
-                     id="cpf_cli"
-                    class="form-control"
-                    inputmode="numeric"
-                    required
-                    placeholder="000.000.000-00"
-                    oniput="mascaraCPF(this)"
-                   
-                    
+    <input
+        type="text"
+        name="cpf_cli"
+        id="cpf_cli"
+        class="form-control"
+        inputmode="numeric"
+        maxlength="14"
+        required
+        placeholder="000.000.000-00"
+        oninput="mascaraCPF(this)"
+    >
 
-
-                     pattern="[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}" 
-                    placeholder="000.000.000-00" oninput="mascaraCPF(this)"
-                >
 
             </div>
 
@@ -339,4 +335,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 </div>
 
-</div><!-- Bootstrap JS --><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script></body></html>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Validações do cadastro -->
+<script src="validacoesUser.js"></script>
+
+<script>
+function mascaraCPF(campo) {
+
+    // Remove tudo que não for número
+    let cpf = campo.value.replace(/\D/g, "");
+
+    // Limita a 11 números
+    cpf = cpf.substring(0, 11);
+
+    // Coloca os pontos e o hífen automaticamente
+    cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
+    cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
+    cpf = cpf.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+
+    campo.value = cpf;
+}
+</script>
+
+</body>
+</html>

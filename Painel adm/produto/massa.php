@@ -2,7 +2,7 @@
 include "../../conexao.php";
 
 // Busca os produtos cadastrados
-$sql = "SELECT * FROM produtos WHERE categoria = 'bebida'";
+$sql = "SELECT * FROM produtos WHERE categoria = 'massa'";
 $result = $conn->query($sql);
 ?>
 

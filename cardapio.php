@@ -496,7 +496,14 @@ $carrinhoQtd = 0; foreach (($_SESSION["ota_carrinho"] ?? []) as $q) { $carrinhoQ
 
         <?php
 
-        $sql = "SELECT * FROM produtos ORDER BY categoria, id_prod";
+$sql = "SELECT * FROM produtos
+ORDER BY
+CASE
+    WHEN categoria = 'pastéis' THEN 1
+    WHEN categoria = 'bebidas' THEN 2
+    ELSE 3
+END,
+id_prod";
         $resultado = $conn->query($sql);
 
         if ($resultado && $resultado->num_rows > 0) {
