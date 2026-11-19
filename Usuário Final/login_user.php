@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($senha_cli === $usuario['senha_cli']) {
 
             $_SESSION['clie'] = $usuario['nome_cli'];
-            $_SESSION['clie_id'] = $usuario['id_cli'];
+            $_SESSION['clie_id'] = $usuario['cpf_cli'];
 
             header("Location: ../index.php");
             exit;

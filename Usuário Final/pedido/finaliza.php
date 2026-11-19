@@ -40,7 +40,7 @@
             padding: 25px;
             height: auto;
             box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
-        }
+        }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
 
         .subtitulo {
             font-size: 21px;

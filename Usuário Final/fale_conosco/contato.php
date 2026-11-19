@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
             $mail->Username = 'otapasteistcc@gmail.com'; // sua conta remetente
-            $mail->Password = 'cwneryosdihqbngz';            // senha de app (sem espaços)
+            $mail->Password = 'bpdtqisaycnisnvj';            // senha de app (sem espaços)
 /*A senha do App's é necessário ir no seguinte caminho para conseguir configurar ela
 Passo1- Acesse o link:https://myaccount.google.com/apppasswords
 Logue em sua conta
@@ -696,30 +696,6 @@ Dê nome igual ao projeto e a senha gerada aparecerá, copie e cole na linha aci
                         required>
 
                 </div>
-
-
-                <!-- TELEFONE -->
-
-                <div class="mb-4">
-
-                    <label
-                        for="telefone_fale"
-                        class="form-label">
-
-                        Telefone:
-
-                    </label>
-
-                    <input
-                        type="text"
-                        name="telefone_fale"
-                        id="telefone_fale"
-                        class="form-control"
-                        placeholder="Insira seu telefone"
-                        required>
-
-                </div>
-
 
                 <!-- ASSUNTO -->
 

@@ -1,4 +1,5 @@
 <?php
+if (session_status() !== PHP_SESSION_ACTIVE) { session_start(); }
 /* Aqui virá o código de busca utilizando o comando SQL */
 include "conexao.php";
 ?>
@@ -1015,12 +1016,12 @@ include "conexao.php";
         <div class="header-direita">
 
             <a
-                href="Usuário Final/login_user.php"
+                href="<?= !empty($_SESSION['clie_id']) ? 'Usuário Final/conta.php' : 'Usuário Final/login_user.php' ?>"
                 class="conta-link">
 
                 <span class="conta">
 
-                    CONTA
+                    <?= !empty($_SESSION['clie']) ? htmlspecialchars($_SESSION['clie'], ENT_QUOTES, 'UTF-8') : 'CONTA' ?>
 
                 </span>
 
