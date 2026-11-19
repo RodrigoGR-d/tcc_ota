@@ -1,116 +1,40 @@
 <?php
-
-// Validação do CPF
-function cpfClienteValido($cpf) {
-
-    if (!preg_match('/^[0-9]{11}$/D', $cpf)) {
-        return false;
-    }
-
-    if (preg_match('/^([0-9])\1{10}$/D', $cpf)) {
-        return false;
-    }
-
-    // Primeiro e segundo dígitos verificadores
+// Validações compartilhadas pelo cadastro, atualização e exclusão.
+function cpfUserValido($cpf) {
+    if (!preg_match('/^[0-9]{11}$/D', $cpf) || preg_match('/^([0-9])\1{10}$/D', $cpf)) return false;
     for ($tamanho = 9; $tamanho <= 10; $tamanho++) {
-
         $soma = 0;
-
-        for ($i = 0; $i < $tamanho; $i++) {
-            $soma += (int)$cpf[$i] * ($tamanho + 1 - $i);
-        }
-
+        for ($i = 0; $i < $tamanho; $i++) $soma += (int)$cpf[$i] * ($tamanho + 1 - $i);
         $resto = $soma % 11;
-
-        $digito = ($resto < 2) ? 0 : 11 - $resto;
-
-        if ((int)$cpf[$tamanho] !== $digito) {
-            return false;
-        }
+        if ((int)$cpf[$tamanho] !== ($resto < 2 ? 0 : 11 - $resto)) return false;
     }
-
     return true;
 }
 
-
-// Lê os campos enviados pelo formulário
-function lerCampoCliente($origem, $nome) {
-
-    return isset($origem[$nome]) && is_string($origem[$nome])
-        ? trim($origem[$nome])
-        : '';
+function encerrarComErroUser($mensagem, $status = 422) {
+    http_response_code($status);
+    header('Content-Type: text/html; charset=UTF-8');
+    echo '<p>' . htmlspecialchars($mensagem, ENT_QUOTES, 'UTF-8') . '</p>';
+    echo '<p><a href="formAluno.php">Voltar ao formulário</a></p>';
+    exit;
 }
 
+function lerCampoUser($origem, $nome) {
+    return isset($origem[$nome]) && is_string($origem[$nome]) ? trim($origem[$nome]) : '';
+}
 
-// Valida os dados do cliente
-function validarDadosCliente($origem) {
-
+function validarDadosUser($origem) {
     $dados = array();
-
-    $rotulos = array(
-        'nome_cli' => 'Nome',
-        'cpf_cli' => 'CPF',
-        'email_cli' => 'E-mail',
-        'senha_cli' => 'Senha'
-    );
-
-    // Verifica se todos os campos foram preenchidos
+    $rotulos = array('cpf_cli' => 'CPF', 'nome_cli' => 'Nome', 'email_cli' => 'E-mail', 'senha_cli' => 'senha');
     foreach ($rotulos as $campo => $rotulo) {
-
-        $dados[$campo] = lerCampoCliente($origem, $campo);
-
-        if ($dados[$campo] === '') {
-
-            return array(
-                'erro' => 'Preencha o campo: ' . $rotulo . '.',
-                'dados' => $dados
-            );
-        }
+        $dados[$campo] = lerCampoUser($origem, $campo);
+        if ($dados[$campo] === '') encerrarComErroUser('Preencha o campo: ' . $rotulo . '.');
     }
-
-
-    // Remove máscara do CPF
-    $dados['cpf_cli'] = preg_replace(
-        '/[^0-9]/',
-        '',
-        $dados['cpf_cli']
-    );
-
-
-    // Valida CPF
-    if (!cpfClienteValido($dados['cpf_cli'])) {
-
-        return array(
-            'erro' => 'Informe um CPF válido com 11 dígitos.',
-            'dados' => $dados
-        );
+    if (!cpfUserValido($dados['cpf_cli'])) encerrarComErroUser('Informe um CPF válido com exatamente 11 dígitos.');
+    // Apenas o formato do endereço; não consulta a existência da caixa postal.
+    if (!filter_var($dados['email_cli'], FILTER_VALIDATE_EMAIL) ||
+        !preg_match('/@[^@]+\.[a-zA-Z]{2,63}$/D', $dados['email_cli'])) {
+        encerrarComErroUser('Informe um e-mail no formato nome@dominio.com.');
     }
-
-
-    // Valida e-mail
-    if (!filter_var($dados['email_cli'], FILTER_VALIDATE_EMAIL)) {
-
-        return array(
-            'erro' => 'Informe um e-mail válido.',
-            'dados' => $dados
-        );
-    }
-
-
-    // Valida senha
-    if (strlen($dados['senha_cli']) < 6) {
-
-        return array(
-            'erro' => 'A senha deve ter pelo menos 6 caracteres.',
-            'dados' => $dados
-        );
-    }
-
-
-    return array(
-        'erro' => '',
-        'dados' => $dados
-    );
+    return $dados;
 }
-
-?>

@@ -7,61 +7,68 @@ $sucesso = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $validacao = validarDadosCliente($_POST);
+    // Retira os pontos e traços do CPF
+    $_POST['cpf_cli'] = preg_replace('/\D/', '', $_POST['cpf_cli']);
 
-    if ($validacao['erro'] !== '') {
+    // Valida os dados recebidos
+    $validacao = validarDadosUser($_POST);
 
-        $erro = $validacao['erro'];
+    $nome_cli = $validacao['nome_cli'];
+    $cpf_cli = $validacao['cpf_cli'];
+    $email_cli = $validacao['email_cli'];
+    $senha_cli = $validacao['senha_cli'];
+
+    // Verifica se CPF ou email já estão cadastrados
+    $sql_verifica = "SELECT * FROM cliente 
+                     WHERE cpf_cli = ? OR email_cli = ? LIMIT 1";
+
+    $stmt_verifica = $conn->prepare($sql_verifica);
+    $stmt_verifica->bind_param("ss", $cpf_cli, $email_cli);
+    $stmt_verifica->execute();
+
+    $resultado = $stmt_verifica->get_result();
+
+    if ($resultado->num_rows > 0) {
+
+        $erro = "CPF ou email já cadastrado.";
 
     } else {
 
-        $nome_cli = $validacao['dados']['nome_cli'];
-        $cpf_cli = $validacao['dados']['cpf_cli'];
-        $email_cli = $validacao['dados']['email_cli'];
-        $senha_cli = $validacao['dados']['senha_cli'];
+        $sql = "INSERT INTO cliente 
+                (nome_cli, cpf_cli, email_cli, senha_cli)
+                VALUES (?, ?, ?, ?)";
 
-        // Verifica se CPF ou email já estão cadastrados
-        $sql_verifica = "SELECT * FROM cliente 
-                         WHERE cpf_cli = ? OR email_cli = ? LIMIT 1";
+        $stmt = $conn->prepare($sql);
 
-        $stmt_verifica = $conn->prepare($sql_verifica);
-        $stmt_verifica->bind_param("ss", $cpf_cli, $email_cli);
-        $stmt_verifica->execute();
+        $stmt->bind_param(
+            "ssss",
+            $nome_cli,
+            $cpf_cli,
+            $email_cli,
+            $senha_cli
+        );
 
-        $resultado = $stmt_verifica->get_result();
+        if ($stmt->execute()) {
 
-        if ($resultado->num_rows > 0) {
-
-            $erro = "CPF ou email já cadastrado.";
+            $sucesso = "Cadastro realizado com sucesso!";
 
         } else {
 
-            $sql = "INSERT INTO cliente 
-                    (nome_cli, cpf_cli, email_cli, senha_cli)
-                    VALUES (?, ?, ?, ?)";
-
-            $stmt = $conn->prepare($sql);
-
-            $stmt->bind_param(
-                "ssss",
-                $nome_cli,
-                $cpf_cli,
-                $email_cli,
-                $senha_cli
-            );
-
-            if ($stmt->execute()) {
-
-                $sucesso = "Cadastro realizado com sucesso!";
-
-            } else {
-
-                $erro = "Não foi possível realizar o cadastro.";
-            }
+            $erro = "Não foi possível realizar o cadastro.";
         }
+
+        $stmt->close();
     }
+
+    $stmt_verifica->close();
 }
-?><!DOCTYPE html><html lang="pt-br"><head><meta charset="UTF-8">
+?>
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+<meta charset="UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -179,9 +186,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </style>
 
 </head>
+
 <body>
     
-<div class="d-flex justify-content-center align-items-center cadastro-container"><div class="card shadow-lg cadastro-card">
+<div class="d-flex justify-content-center align-items-center cadastro-container">
+
+<div class="card shadow-lg cadastro-card">
 
     <!-- Cabeçalho -->
     <div class="cadastro-header">
@@ -209,7 +219,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="alert alert-danger">
                 <i class="bi bi-exclamation-triangle"></i>
-                <?= $erro ?>
+                <?= htmlspecialchars($erro, ENT_QUOTES, 'UTF-8') ?>
             </div>
 
         <?php endif; ?>
@@ -219,14 +229,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="alert alert-success">
                 <i class="bi bi-check-circle"></i>
-                <?= $sucesso ?>
+                <?= htmlspecialchars($sucesso, ENT_QUOTES, 'UTF-8') ?>
             </div>
 
         <?php endif; ?>
 
 
-        <form onsubmit="if (typeof validaruser != 'function') 
-        { alert('O arquivo validacoesUser.js não carregou. Verifique se ele está na mesma pasta do formulário.'); return false; } return validarUser();" method="POST" action="">
+        <form 
+            onsubmit="if (typeof validarUser !== 'function') 
+            { alert('O arquivo validacoesUser.js não carregou. Verifique se ele está na mesma pasta do formulário.'); return false; } return validarUser();" 
+            method="POST" 
+            action=""
+        >
 
 
             <!-- Nome -->
@@ -255,18 +269,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     CPF
                 </label>
 
-    <input
-        type="text"
-        name="cpf_cli"
-        id="cpf_cli"
-        class="form-control"
-        inputmode="numeric"
-        maxlength="14"
-        required
-        placeholder="000.000.000-00"
-        oninput="mascaraCPF(this)"
-    >
-
+                <input
+                    type="text"
+                    name="cpf_cli"
+                    id="cpf_cli"
+                    class="form-control"
+                    inputmode="numeric"
+                    maxlength="14"
+                    required
+                    placeholder="000.000.000-00"
+                    oninput="mascaraCPF(this)"
+                >
 
             </div>
 
@@ -283,7 +296,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     name="email_cli"
                     id="email_cli"
                     class="form-control"
-                    required pattern="[^\s@]+@[^\s@.]+(\.[^\s@.]+)+"
+                    required
+                    pattern="[^\s@]+@[^\s@.]+(\.[^\s@.]+)+"
                 >
 
             </div>
@@ -337,29 +351,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 </div>
 
+
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- Validações do cadastro -->
 <script src="validacoesUser.js"></script>
-
-<script>
-function mascaraCPF(campo) {
-
-    // Remove tudo que não for número
-    let cpf = campo.value.replace(/\D/g, "");
-
-    // Limita a 11 números
-    cpf = cpf.substring(0, 11);
-
-    // Coloca os pontos e o hífen automaticamente
-    cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
-    cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
-    cpf = cpf.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-
-    campo.value = cpf;
-}
-</script>
 
 </body>
 </html>

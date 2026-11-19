@@ -3,45 +3,41 @@ session_start();
 include "../conexao.php";
 $erro = "";
 
-/*O login precisa solicitar acesso ao servidor
-SGBD MySQL para que ele possa verificar o login
-e senha para entrar no sistema*/
+/* O login precisa solicitar acesso ao servidor
+SGBD MySQL para verificar o login e senha. */
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $cpf_cli = $_POST['cpf_cli'];
+
+    $cpf_cli = preg_replace('/\D/', '', $_POST['cpf_cli']);
     $email_cli = $_POST['email_cli'];
     $senha_cli = $_POST['senha_cli'];
 
-/*Na linha SQL será realizado através do comando
-SELECT o login pegando a cpf e a senha do administrador
-e adicionado o comando LIMIT 1 para dizer que só
-pode pegar 1 dado apenas*/
+    /* Consulta o CPF e o email do cliente no banco de dados */
+
     $sql = "SELECT * FROM cliente
     WHERE cpf_cli = ? AND email_cli = ? LIMIT 1";
-    
-/*Na sequência dos códigos abaixo a variável $stmt
-recebe o comando SQL e através do bind_param (
-que é utilizado para se comunicar com o bd) ele 
-envia a quantidade de informações que o banco precisa
-para logar, o banco recebe, consulta na tabela
-administrador e retorna se este usuário existe*/    
+
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss", $cpf_cli, $email_cli); // corrigido
+    $stmt->bind_param("ss", $cpf_cli, $email_cli);
     $stmt->execute();
     $resultado = $stmt->get_result();
 
     if ($resultado->num_rows === 1) {
+
         $usuario = $resultado->fetch_assoc();
-        //if (password_verify($senha_adm, $usuario['senha_adm'])) { // Linha com criptografia
+
         if ($senha_cli === $usuario['senha_cli']) {
+
             $_SESSION['clie'] = $usuario['nome_cli'];
             $_SESSION['clie_id'] = $usuario['id_cli'];
-           
+
             header("Location: ../index.php");
             exit;
+
         } else {
             $erro = "Login/senha incorretos.";
         }
+
     } else {
         $erro = "Login/senha incorretos.";
     }

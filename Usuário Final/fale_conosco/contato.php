@@ -1,6 +1,111 @@
 <?php
 /* Aqui virá o código de busca utilizando o comando SQL */
 include "../../conexao.php";
+/* include "protege.php"; */
+
+/* Adicionar a pasta de projeto phpmailer dentro do projeto de TCC
+   Colocar phpmailer/src/ dentro da pasta phpmailer/ do projeto. */
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require '../../phpmailer/src/Exception.php';
+require '../../phpmailer/src/PHPMailer.php';
+require '../../phpmailer/src/SMTP.php';
+
+$mensagem_status = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Recebe e limpa os dados do formulário
+    $nome    = trim($_POST['nome_fale'] ?? '');
+    $email   = trim($_POST['email_fale'] ?? '');
+    $assunto = trim($_POST['assunto_fale'] ?? 'Contato pelo site');
+    $mensagem = trim($_POST['mensagem_fale'] ?? '');
+
+    // Validação simples do e-mail do visitante
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $mensagem_status = "<div class='alert alert-danger'>E-mail inválido. Verifique e tente novamente.</div>";
+    } else {
+        $mail = new PHPMailer(true);
+
+        try {
+
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'otapasteistcc@gmail.com'; // sua conta remetente
+            $mail->Password = 'cwneryosdihqbngz';            // senha de app (sem espaços)
+/*A senha do App's é necessário ir no seguinte caminho para conseguir configurar ela
+Passo1- Acesse o link:https://myaccount.google.com/apppasswords
+Logue em sua conta
+Ative a verificação de 2 etapas
+Pesquise a opção senha do App's
+Dê nome igual ao projeto e a senha gerada aparecerá, copie e cole na linha acima*/
+
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+
+            // ===== 1) Enviar NOTIFICAÇÃO para a COORDENAÇÃO (VOCÊ) =====
+            $mail->setFrom('otapasteistcc@gmail.com', 'Sistema de Contato - OTA');
+
+            // Destino da notificação (sua caixa de coordenação)
+            $mail->addAddress('otapasteistcc@gmail.com', 'Coordenação OTA');
+
+            // Quando você clicar em "Responder" na sua caixa, a resposta irá para o visitante
+            $mail->addReplyTo($email, $nome);
+
+            $mail->isHTML(true);
+            $mail->Subject = "Nova mensagem de contato: " . htmlspecialchars($assunto);
+
+            $mail->Body = "
+                <h3>Nova mensagem enviada pelo site</h3>
+                <p><strong>Nome:</strong> " . htmlspecialchars($nome) . "</p>
+                <p><strong>Email:</strong> " . htmlspecialchars($email) . "</p>
+                <p><strong>Assunto:</strong> " . htmlspecialchars($assunto) . "</p>
+                <p><strong>Mensagem:</strong><br>" . nl2br(htmlspecialchars($mensagem)) . "</p>
+                <hr><small>Enviado automaticamente pelo sistema.</small>
+            ";
+            $mail->AltBody = "Nova mensagem de $nome ($email): $mensagem";
+
+            // Envia a notificação para você
+            $mail->send();
+
+            // ===== 2) Enviar CONFIRMAÇÃO para o VISITANTE =====
+            // Precisamos limpar destinatários e cabeçalhos que foram adicionados
+            $mail->clearAddresses();
+            $mail->clearReplyTos();
+            $mail->clearAllRecipients();
+            $mail->clearAttachments();
+            $mail->clearCustomHeaders();
+
+            // Manter o mesmo remetente (sua conta SMTP), e enviar para o e-mail digitado
+            $mail->setFrom('otapasteistcc@gmail.com', 'Coordenação OTA');
+            $mail->addAddress($email, $nome);           // <-- destinatário: o e-mail digitado no formulário
+            $mail->addReplyTo('otapasteistcc@gmail.com', 'Coordenação OTA'); // resposta volta pra você
+
+            $mail->Subject = "Recebemos sua mensagem - OTA";
+            $mail->Body = "
+                <p>Olá " . htmlspecialchars($nome) . ",</p>
+                <p>Recebemos sua mensagem com o assunto <strong>" . htmlspecialchars($assunto) . "</strong>.</p>
+                <p>Em breve entraremos em contato. Abaixo, uma cópia do que você enviou:</p>
+                <hr>
+                <p>" . nl2br(htmlspecialchars($mensagem)) . "</p>
+                <hr>
+                <p>Atenciosamente,<br>Coordenação OTA</p>
+            ";
+            $mail->AltBody = "Recebemos sua mensagem: $mensagem";
+
+            // Envia a confirmação ao visitante
+            $mail->send();
+
+            $mensagem_status = "<div class='alert alert-success mt-3'>Mensagem enviada com sucesso! Obrigada pelo contato.</div>";
+
+        } catch (Exception $e) {
+            // Se der erro, mostrar a mensagem para diagnóstico
+            $mensagem_status = "<div class='alert alert-danger mt-3'>Erro ao enviar mensagem: {$mail->ErrorInfo}</div>";
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -543,7 +648,7 @@ include "../../conexao.php";
 
             <form
                 method="post"
-                action="insertFale.php"
+                action=""
                 enctype="multipart/form-data">
 
 
@@ -678,6 +783,8 @@ include "../../conexao.php";
                 </div>
 
             </form>
+
+            <?= $mensagem_status; ?>
 
         </div>
 
